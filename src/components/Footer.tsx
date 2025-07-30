@@ -2,6 +2,12 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { queryPageContent } from './Utilities';
 
+interface FooterDetails {
+  heading: string;
+  description1?: string;
+  description2?: string;
+  description3?: string;
+}
 interface FooterData {
   left_column_title: string;
   left_column_subtitle:  string;
@@ -73,7 +79,7 @@ export default function Footer() {
                     {contactLoading && <div>Loading...</div>}
                     {contactError && <div>Error loading contact information.</div>}
                     {contactData && 
-                    contactData.second_details.map((data, index:number) =>(
+                    contactData.second_details.map((data: FooterDetails, index:number) =>(
                         <p className='py-1  text-sm' key={index}>{data.heading}: {data.description1}</p>
                     ))}
                   </address>

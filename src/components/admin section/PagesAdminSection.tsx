@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PageContent from './PageContent';
 // import { motion } from 'framer-motion';
 
@@ -8,7 +8,7 @@ interface Page {
 }
 
 interface PageContent {
-  [key: string]: any;
+  [key: string]: string | number;
 }
 
 const pageList: Page[] = [

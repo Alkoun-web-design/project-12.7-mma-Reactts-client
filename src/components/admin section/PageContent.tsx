@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { handleGetData, handleSaveContent, serverAPI } from '../Utilities';
+import { serverAPI } from '../Utilities';
 import { LucideArrowLeft } from 'lucide-react';
 
 interface Details{
@@ -127,7 +127,7 @@ export default function PageContent ({
       {label}
     </h2>
     { loading ? <div className="text-gray-700 mb-2">Loading...</div> :
-      <form className="text-sm mb-4 flex gap-2 flex-wrap" onSubmit={(e) => handleSaveContent(e, page, form, setSaveStatus)}>
+      <form className="text-sm mb-4 flex gap-2 flex-wrap" onSubmit={(e) => handleSaveContent(e, page)}>
         <div>
 
             {content.map((data) => (
