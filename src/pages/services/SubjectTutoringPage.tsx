@@ -59,7 +59,7 @@ const SubjectTutoringPage: React.FC = () => {
   if (!subjects) return null; 
 
     // Group subjects by name and collect their levels
-  const groupedSubjects = subjects.reduce((acc, subject:Subject) => {
+  const groupedSubjects = subjects.reduce((acc: Record<string, Set<string>>, subject:Subject) => {
     if (!acc[subject.name]) {
       acc[subject.name] = new Set();
     }
@@ -159,16 +159,17 @@ const SubjectTutoringPage: React.FC = () => {
         {subjectsError && <div className="text-center text-red-500">Error loading subjects.</div>}
         {subjects &&
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {Object.entries(groupedSubjects).map(([subjectName, levels], index) => (
+            {/* {Object.entries(groupedSubjects).map(([subjectName, levels], index) => ( */}
+            {Object.entries(groupedSubjects).map(([subjectName], index) => (
               <div key={index} className="bg-white rounded-xl shadow-md p-6">
                 <h3 className="text-xl font-semibold text-primary-600 mb-4">{subjectName}</h3>
                 <ul className="text-gray-700 space-y-1">
-                  {Array.from(levels).map((level, i) => (
+                  {/* {Array.from(levels:string).map((level, i) => (
                     <li key={i} className="flex items-center">
                       <span className="mr-2 text-primary-500">•</span>
                       <span>{level}</span>
                     </li>
-                  ))}
+                  ))} */}
                 </ul>
               </div>
             ))}
