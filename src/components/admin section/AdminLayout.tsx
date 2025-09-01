@@ -190,8 +190,5 @@ export default function AdminLayout() {
           
         </div>
       </div>
-      {/* <SearchDialog />
-      <SearchKeyboardShortcut /> */}
-    {/* </SearchProvider> */}
   );
 }
