@@ -82,37 +82,6 @@ export const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>, setForm
     setForm({ ...form, [e.target.name]: e.target.value });
 };
 
-  // Helper to get content and set edit form for a page
-export const handleEditContent = async (page: string, setEditForm: any, setSaveStatus: any) => {
-    try {
-      const response = await fetch(`${serverAPI}pages/${page}`, {
-        credentials: 'include'
-      });
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch page content');
-      }
-
-      const data = await response.json();
-      setEditForm(data);
-      // setPage(page);
-      setSaveStatus('');
-    } catch (error) {
-      console.error('Error fetching page content:', error);
-      setSaveStatus('Error loading page content');
-    }
-  };
-
-  // Handle form changes for each page type
-// export const handleEditFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-//     const { name, value } = e.target;
-//     setEditForm((prev: PageContent) => ({
-//       ...prev,
-//       [name]: value
-//     }));
-//   };
-
-// Save handler for each page type
 export const handleSaveContent = async (e: React.FormEvent, page:string, form:any, setSaveStatus:any) => {
   e.preventDefault();
     if (!page) return;
@@ -161,8 +130,8 @@ export const handleFormSubmit = async (e: React.FormEvent, formData: any, setSub
         
         setSuccess(true);
         setFormData(formData);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
+      } catch (error) {
+        console.error('An error occurred:', error);
       } finally {
         setSubmitting(false);
       }

@@ -22,7 +22,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
   fields, 
   serviceType 
 }) => {
-  const [formData, setFormData] = useState<string[]>([]);
+  const [formData, setFormData] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
