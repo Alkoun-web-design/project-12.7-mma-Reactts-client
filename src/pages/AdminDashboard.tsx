@@ -222,6 +222,8 @@ const AdminDashboard: React.FC = () => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
+      {loading ? <div className="text-gray-900 mb-2">Loading...</div> : (
+        <>
       <aside className="w-64 bg-white border-r flex flex-col py-8 px-4">
         <div className="mb-8 text-2xl font-bold text-primary-700">Admin Dashboard</div>
         <nav className="flex flex-col gap-2">
@@ -243,6 +245,7 @@ const AdminDashboard: React.FC = () => {
       </aside>
 
       {/* Main Content */}
+
       <main className="w-full flex flex-col items-center border-gray-300 border-l-1">
         {selectedTab === 'pages' && (
           <PagesAdminSection />
@@ -448,6 +451,7 @@ const AdminDashboard: React.FC = () => {
           />
         )} */}
       </main>
+    </>)}
     </div>
   );
 };

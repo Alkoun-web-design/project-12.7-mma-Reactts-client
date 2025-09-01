@@ -100,6 +100,8 @@ const CounsellorDashboard: React.FC = () => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
+      {loading ? <div className="text-gray-900 mb-2">Loading...</div> : (
+      <>
       <aside className="w-56 bg-white border-r flex flex-col py-8 px-4">
         <div className="mb-8 text-2xl font-bold text-primary-700">Counsellor Dashboard</div>
         <nav className="flex flex-col gap-2">
@@ -190,6 +192,7 @@ const CounsellorDashboard: React.FC = () => {
           </div>
         )}
       </main>
+      </>)}
     </div>
   );
 };

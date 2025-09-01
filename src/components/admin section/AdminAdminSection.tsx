@@ -111,7 +111,9 @@ const AdminAdminSection: React.FC<AdminSectionProps> = ({
     <h2 className="text-2xl font-semibold mb-6 text-primary-700 flex items-center">
         Adminstrator Profiles
     </h2>
-    {!data && <div className="text-red-600 mb-2">There was a problem with loading the data.</div>}    
+    {loading && <div className="text-gray-900 mb-2">Loading...</div>}    
+    {data && (
+      <>    
     <form className="text-sm mb-4 flex gap-2 flex-wrap" encType="multipart/form-data" onSubmit={(e)=> handleAddOrUpdateData(e)}>
       <div>
         {/* <input name="name" value={form.name} onChange={e => setForm((f: any) => ({ ...f, name: e.target.value }))} placeholder="Name" className="border rounded px-2 py-1" required /> */}
@@ -168,42 +170,43 @@ const AdminAdminSection: React.FC<AdminSectionProps> = ({
       {id && <button type="button" className="btn btn-secondary btn-sm h-12 my-auto" onClick={() => { setId(null); setForm({ name: '', email: '', bio: '', education: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar_url: ''}); setAvatarPreview(null); }}>Cancel</button>}
     </form>
     <div className='overflow-x-auto'>
-    <table className="text-sm">
-      <thead>
-        <tr className="text-center text-gray-600">
-          <th className="px-2 w-20">Name</th>
-          <th className="px-2">Email</th>
-          <th className="px-2">Bio</th>
-          <th className="px-2">Education</th>
-          <th className="px-2">Languages</th>
-          <th className="px-2">Work Experience</th>
-          <th className="px-2">Certifications</th>
-          <th className="px-2">Achievements</th>
-          <th className="px-2">Avatar</th>
-          <th className="px-2">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map(item => (
-          <tr key={item.user_id} className="text-left border-b">
-            <td className="p-2">{item.name}</td>
-            <td className="p-2">{item.email}</td>
-            <th className="p-2">{item.bio}</th>
-            <th className="p-2">{item.education}</th>
-            <th className="p-2">{item.languages}</th>
-            <th className="p-2">{item.work_experience}</th>
-            <th className="p-2">{item.certifications}</th>
-            <th className="p-2">{item.achievements}</th>
-            <th className="p-2"><img src={`${uploadsURL}${item.avatar_url}`} alt="Avatar Preview" className="w-12 h-12 rounded-full object-cover object-center border" /></th>
-            <td className="p-2 flex gap-2">
-              <button className="btn btn-xs btn-primary my-auto" onClick={() => { setForm(item); setId(item.user_id); setAvatarPreview(`${uploadsURL}${item.avatar_url}`);}}>Edit</button>
-              <button className="btn btn-xs btn-danger bg-red-600 text-white my-auto" type="button" onClick={() => handleDelete(item.user_id)}>Delete</button>
-            </td>
+      <table className="text-sm">
+        <thead>
+          <tr className="text-center text-gray-600">
+            <th className="px-2 w-20">Name</th>
+            <th className="px-2">Email</th>
+            <th className="px-2">Bio</th>
+            <th className="px-2">Education</th>
+            <th className="px-2">Languages</th>
+            <th className="px-2">Work Experience</th>
+            <th className="px-2">Certifications</th>
+            <th className="px-2">Achievements</th>
+            <th className="px-2">Avatar</th>
+            <th className="px-2">Actions</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data.map(item => (
+            <tr key={item.user_id} className="text-left border-b">
+              <td className="p-2">{item.name}</td>
+              <td className="p-2">{item.email}</td>
+              <th className="p-2">{item.bio}</th>
+              <th className="p-2">{item.education}</th>
+              <th className="p-2">{item.languages}</th>
+              <th className="p-2">{item.work_experience}</th>
+              <th className="p-2">{item.certifications}</th>
+              <th className="p-2">{item.achievements}</th>
+              <th className="p-2"><img src={`${uploadsURL}${item.avatar_url}`} alt="Avatar Preview" className="w-12 h-12 rounded-full object-cover object-center border" /></th>
+              <td className="p-2 flex gap-2">
+                <button className="btn btn-xs btn-primary my-auto" onClick={() => { setForm(item); setId(item.user_id); setAvatarPreview(`${uploadsURL}${item.avatar_url}`);}}>Edit</button>
+                <button className="btn btn-xs btn-danger bg-red-600 text-white my-auto" type="button" onClick={() => handleDelete(item.user_id)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
+    </>)}
   </div>
 );
 }

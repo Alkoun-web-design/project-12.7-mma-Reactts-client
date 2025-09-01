@@ -60,6 +60,18 @@ export interface Counsellor {
   avatar_url: string | null;
 }
 
+export interface StaffForm { 
+  name: string; 
+  email: string;
+  bio: string; 
+  education: string; 
+  languages: string; 
+  work_experience: string; 
+  certifications: string; 
+  achievements: string; 
+  avatar: File | null;
+};
+
 export interface User { 
   id: number;  
   email: string; 

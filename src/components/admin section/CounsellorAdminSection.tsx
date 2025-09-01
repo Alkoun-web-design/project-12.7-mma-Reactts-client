@@ -110,8 +110,10 @@ const CounsellorAdminSection: React.FC<AdminSectionProps> = ({
     <h2 className="text-2xl font-semibold mb-6 text-primary-700 flex items-center">
         Counsellor Profiles
     </h2>
-    {!data && <div className="text-red-600 mb-2">There was a problem with loading the data.</div>}    
-    <form encType="multipart/form-data" className="text-sm mb-4 flex gap-2 flex-wrap" onSubmit={(e) => handleAddOrUpdateData(e)}>
+    {loading && <div className="text-gray-900 mb-2">Loading...</div>}    
+    {data && (
+      <>        
+      <form encType="multipart/form-data" className="text-sm mb-4 flex gap-2 flex-wrap" onSubmit={(e) => handleAddOrUpdateData(e)}>
       <div>
         {/* <input name="name" value={form.name} onChange={e => setForm((f: any) => ({ ...f, name: e.target.value }))} placeholder="Name" className="border rounded px-2 py-1" required /> */}
         <input name="name" value={form.name} onChange={(e) => handleFormChange(e)} placeholder="Counsellor's Name" className="border rounded px-2 py-1" required />
@@ -197,6 +199,7 @@ const CounsellorAdminSection: React.FC<AdminSectionProps> = ({
         ))}
       </tbody>
     </table>
+    </>)}
   </div>
 );
 }

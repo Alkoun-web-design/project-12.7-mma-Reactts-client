@@ -20,7 +20,7 @@ interface Tutor {
 
 interface AdminSectionProps {
   data: Tutor[];
-  form: any;
+  form: Tutor;
   id: number | null;
   setForm: (form: any) => void;
   setId: (id: number | null) => void;
@@ -36,7 +36,7 @@ const TutorAdminSection: React.FC<AdminSectionProps> = ({
   handleDelete,
 }) => {
       
-    const [data, setData] = useState<Admin[]>([]);
+    const [data, setData] = useState<Tutor[]>([]);
     const [loading, setLoading] = useState(true);
     const [avatar, setAvatar] = useState<File | null>(null);
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
@@ -114,8 +114,10 @@ const TutorAdminSection: React.FC<AdminSectionProps> = ({
     <h2 className="text-2xl font-semibold mb-6 text-primary-700 flex items-center">
         Tutor Profiles
     </h2>
-    {!data && <div className="text-red-600 mb-2">There was a problem with loading the data.</div>}    
-    <form encType="multipart/form-data" className="text-sm mb-4 flex gap-2 flex-wrap" onSubmit={(e)  => handleAddOrUpdateData(e)}>
+    {loading && <div className="text-gray-900 mb-2">Loading...</div>}    
+    {data && (
+      <>        
+      <form encType="multipart/form-data" className="text-sm mb-4 flex gap-2 flex-wrap" onSubmit={(e)  => handleAddOrUpdateData(e)}>
       <div>
         {/* <input name="name" value={form.name} onChange={e => setForm((f: any) => ({ ...f, name: e.target.value }))} placeholder="Name" className="border rounded px-2 py-1" required /> */}
         <input name="name" value={form.name} onChange={(e) => handleFormChange(e)} placeholder="Tutor's Name" className="border rounded px-2 py-1" required />
@@ -217,6 +219,7 @@ const TutorAdminSection: React.FC<AdminSectionProps> = ({
         ))}
       </tbody>
     </table>
+    </>)}
   </div>
 );
 }

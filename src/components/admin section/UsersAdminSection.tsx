@@ -70,6 +70,9 @@ const UsersAdminSection: React.FC<AdminSectionProps> = ({
     <h2 className="text-2xl font-semibold mb-6 text-primary-700 flex items-center">
       Users
     </h2>
+    {loading && <div className="text-gray-900 mb-2">Loading...</div>}    
+    {data && (
+      <>    
     <form onSubmit={(e) => handleAddOrUpdateData(e)} className="text-sm mb-4 flex gap-2 flex-wrap">
       <div>
         <input name="email" value={form.email} onChange={(e) => handleFormChange(e)} type="email" placeholder="Email" className="border rounded px-2 py-1" required />
@@ -110,6 +113,7 @@ const UsersAdminSection: React.FC<AdminSectionProps> = ({
         ))}
       </tbody>
     </table>
+    </>)}
   </div>
 )
 };
