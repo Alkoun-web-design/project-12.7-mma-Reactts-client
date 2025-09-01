@@ -3,7 +3,7 @@ import { Outlet, useLocation, Link, redirect } from 'react-router-dom';
 import Sidebar from '../Sidebar';
 import { Menu } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SearchProvider } from '../Search/SearchContext';
+// import { SearchProvider } from '../Search/SearchContext';
 // import { SearchDialog, SearchButton } from '../Search/SearchDialog';
 // import { SearchKeyboardShortcut } from '../Search/SearchKeyboardShortcut';
 import { UserContext } from '../../App';
@@ -96,7 +96,7 @@ export default function AdminLayout() {
   }, [sidebarOpen]);
 
   return (
-    <SearchProvider>
+    // <SearchProvider>
       <div className="flex min-h-screen bg-gray-50">
         {/* Sidebar for larger screens */}
         <div className="hidden lg:block w-64 flex-shrink-0">
@@ -192,6 +192,6 @@ export default function AdminLayout() {
       </div>
       {/* <SearchDialog />
       <SearchKeyboardShortcut /> */}
-    </SearchProvider>
+    {/* </SearchProvider> */}
   );
 }

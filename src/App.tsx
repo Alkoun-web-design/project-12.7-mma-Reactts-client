@@ -21,7 +21,7 @@ import StudentActivitiesPage from './pages/services/StudentActivitiesPage';
 import AcademicResourcesPage from './pages/services/AcademicResourcesPage';
 import LearnLanguagesPage from './pages/services/LearnLanguagesPage';
 import NotFound from './pages/NotFound';
-import SearchResults from './pages/SearchResults';
+// import SearchResults from './pages/SearchResults';
 import CounsellorDashboard from './pages/CounsellorDashboard';
 import TutorDashboard from './pages/TutorDashboard';
 import AdminDashboard from './pages/AdminDashboard';
@@ -79,7 +79,7 @@ const [user, setUser] = useState<User | null>(null);
           <Route path="faqs" element={<Faqs />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="get-in-touch" element={<GetInTouch />} />
-          <Route path="search-results" element={<SearchResults />} />
+          {/* <Route path="search-results" element={<SearchResults />} /> */}
           <Route element={<AdminRoutes/>} >
             <Route path='admin-dashboard' element={<AdminDashboard />} />
           </Route>
