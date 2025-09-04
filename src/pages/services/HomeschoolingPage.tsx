@@ -77,7 +77,7 @@ const HomeschoolingPage: React.FC = () => {
             
             <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-3">{pageContent.third_title}</h3>
             <ul className="list-disc pl-6 space-y-2 mb-6">
-              {pageContent.third_details.map((content, index:number) => (
+              {pageContent.third_details.map((content:string, index:number) => (
                 <li key={index}>{content}</li>
               ))}
             </ul>
@@ -88,7 +88,7 @@ const HomeschoolingPage: React.FC = () => {
             </p>
             
             <ul className="list-disc pl-6 space-y-2 mb-6">
-              {pageContent.fourth_details.map((content, index:number) => (
+              {pageContent.fourth_details.map((content: {heading:string, description:string}, index:number) => (
                 <li key={index}><strong>{content.heading}</strong> {content.description}</li>
               ))}
             </ul>
@@ -99,7 +99,7 @@ const HomeschoolingPage: React.FC = () => {
             </p>
             
             <ul className="list-disc pl-6 space-y-2">
-              {pageContent.fifth_details.map((content, index:number) => (
+              {pageContent.fifth_details.map((content: {heading:string, description:string}, index:number) => (
                 <li key={index}><strong>{content.heading}</strong> {content.description}</li>
               ))}
             </ul>

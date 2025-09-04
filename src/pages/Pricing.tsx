@@ -273,7 +273,7 @@ const PricingPage: React.FC = () => {
             <h3 className="text-xl font-semibold text-gray-900 mb-4">{pageContent.fourth_title}</h3>
             <ul className="space-y-3">
 
-              {pageContent.fourth_details.map((content, index) => (
+              {pageContent.fourth_details.map((content: {description:string}, index: number) => (
                 <li key={index} className="flex items-start gap-2">
                   <span className="text-primary-500 mt-1">
                     <Check size={16} />
@@ -294,7 +294,7 @@ const PricingPage: React.FC = () => {
           >
             <h3 className="text-xl font-semibold text-gray-900 mb-4">{pageContent.fifth_title}</h3>
             <ul className="space-y-3">
-              {pageContent.fifth_details.map((content, index) => (
+              {pageContent.fifth_details.map((content: {description:string}, index: number) => (
                 <li key={index} className="flex items-start gap-2">
                   <span className="text-gray-500 mt-1">
                     <Check size={16} />

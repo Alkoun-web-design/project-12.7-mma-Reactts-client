@@ -129,7 +129,7 @@ const StudyCoachingPage: React.FC = () => {
             </p>
             
             <ol className="list-decimal pl-6 space-y-4 mb-6">
-              {pageContent.third_details.map((content, index:number) => (
+              {pageContent.third_details.map((content: {heading:string, description:string}, index:number) => (
                 <li key={index}>
                   <strong className="text-gray-900">{content.heading}</strong>
                   <p className="mt-1">{content.description}</p>
@@ -143,7 +143,7 @@ const StudyCoachingPage: React.FC = () => {
             </p>
             
             <ul className="list-disc pl-6 space-y-2 mb-6">
-              {pageContent.fourth_details.map((content, index:number) => (
+              {pageContent.fourth_details.map((content: {description:string}, index:number) => (
                 <li key={index}>{content.description}</li>
               ))}
             </ul>

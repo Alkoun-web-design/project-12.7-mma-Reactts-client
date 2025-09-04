@@ -99,8 +99,8 @@ const AdminAdminSection: React.FC<AdminSectionProps> = ({
         setId(null);
         const refreshed = await fetch(`${serverAPI}admins`, { credentials: 'include' });
         setData(await refreshed.json());
-      } catch (err: any) {
-        console.error(err.message || 'Error saving data.');
+      } catch (err: unknown) {
+        console.error(err || 'Error saving data.');
       }
     };
   

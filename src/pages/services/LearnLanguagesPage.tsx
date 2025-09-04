@@ -5,11 +5,12 @@ import SignupForm from '../../components/SignupForm';
 import { useQuery } from '@tanstack/react-query';
 import { queryData, queryPageContent } from '../../components/Utilities';
 
-interface Language {
-  id: number;
+interface LanguageContent {
   name: string;
-  code: string;
-  is_active: boolean;
+  popular: boolean;
+  beginner: boolean;
+  intermediate: boolean;
+  advanced: boolean;
 }
 
 // interface LanguageWithLevels extends Language {
@@ -102,14 +103,14 @@ const LearnLanguagesPage: React.FC = () => {
             </p>
             
             <ul className="list-disc pl-6 space-y-2 mb-6">
-              {pageContent.third_details.map((content, index:number) => (
+              {pageContent.third_details.map((content: {description:string}, index:number) => (
                 <li key={index}>{content.description}</li>
               ))}
             </ul>
             
             <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-3">{pageContent.fourth_title}</h3>
             <div className="space-y-4 mb-6">
-              {pageContent.fourth_details.map((content, index:number) => (
+              {pageContent.fourth_details.map((content: {heading:string, description:string, schedule:string}, index:number) => (
                 <div key={index} className="bg-primary-50 p-4 rounded-lg">
                 <h4 className="font-semibold text-gray-900 mb-1">{content.heading}</h4>
                 <p className="text-gray-700">
@@ -138,7 +139,7 @@ const LearnLanguagesPage: React.FC = () => {
             </p>
             
             <ul className="list-disc pl-6 space-y-2">
-              {pageContent.fifth_details.map((content, index:number) => (
+              {pageContent.fifth_details.map((content: {description:string}, index:number) => (
                 <li key={index}>{content.description}</li>
               ))}
             </ul>
@@ -173,7 +174,7 @@ const LearnLanguagesPage: React.FC = () => {
             {languagesLoading && <div className="text-center text-gray-400">Loading...</div>}
             {languagesError && <div className="text-center text-red-500">Error loading langauges.</div>}
             {languages &&
-              languages.map((language, index:number) => (
+              languages.map((language:LanguageContent, index:number) => (
                 <tr key={index} className={language.popular ? "bg-primary-50" : ""}>
                   <td className="py-3 px-6 text-gray-900 font-medium">
                     {language.name}
@@ -211,7 +212,7 @@ const LearnLanguagesPage: React.FC = () => {
       <div className="mb-16">
         <h2 className="section-title text-center mb-8">{pageContent.seventh_title}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {pageContent.seventh_details.map((content, index:number) => (
+          {pageContent.seventh_details.map((content: {heading:string, description:string}, index:number) => (
             <div key={index} className="bg-white p-6 rounded-xl shadow-md">
               <div className="mb-4">
                 {/* {content.icon} */}
@@ -230,7 +231,7 @@ const LearnLanguagesPage: React.FC = () => {
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">{pageContent.ninth_title}</h3>
               <ul className="space-y-2">
-                {pageContent.ninth_details.map((content, index:number) => (
+                {pageContent.ninth_details.map((content: {description:string}, index:number) => (
                   <li key={index} className="flex items-start">
                   <span className="text-primary-500 mr-2">•</span>
                   <span className="text-gray-700">{content.description}</span>
@@ -243,7 +244,7 @@ const LearnLanguagesPage: React.FC = () => {
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">{pageContent.tenth_title}</h3>
               <ul className="space-y-2">
-                {pageContent.tenth_details.map((content, index:number) => (
+                {pageContent.tenth_details.map((content: {description:string}, index:number) => (
                   <li key={index} className="flex items-start">
                     <span className="text-primary-500 mr-2">•</span>
                     <span className="text-gray-700">{content.description}</span>

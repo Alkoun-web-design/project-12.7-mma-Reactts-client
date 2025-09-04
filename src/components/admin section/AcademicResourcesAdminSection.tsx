@@ -19,7 +19,7 @@ interface AdminSectionProps {
   handleDelete: (id: number) => void;
 }
 
-const AcademicResourcesAdminSection: React.FC<AdminSectionProps> = ({
+const AcademicResourcesAdminSection = ({
   data,
   form,
   id,
@@ -29,7 +29,7 @@ const AcademicResourcesAdminSection: React.FC<AdminSectionProps> = ({
   handleSubmit,
   // handleEdit: (user: User) => void;
   handleDelete,
-}) => (
+}: AdminSectionProps) => (
   <div className="w-full bg-white rounded-lg shadow p-8">
     <h2 className="text-2xl font-semibold mb-6 text-primary-700 flex items-center">
         Academic Resources

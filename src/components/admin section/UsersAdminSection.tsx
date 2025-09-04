@@ -9,6 +9,13 @@ interface User {
   user_type: "admin" | "tutor" | "counsellor";
 }
 
+interface UserForm {
+  email: string; 
+  password?: string;
+  user_type: string;
+}
+
+
 interface AdminSectionProps {
   data: User[];
   form: any;
@@ -28,7 +35,7 @@ const UsersAdminSection: React.FC<AdminSectionProps> = ({
         
       const [data, setData] = useState<User[]>([]);
       const [loading, setLoading] = useState(true);
-      const [form, setForm] = useState<any>({ 
+      const [form, setForm] = useState<UserForm>({ 
         email: '',
         password: '',
         user_type: '',
@@ -60,8 +67,8 @@ const UsersAdminSection: React.FC<AdminSectionProps> = ({
           setId(null);
           const refreshed = await fetch(`${serverAPI}users`, { credentials: 'include' });
           setData(await refreshed.json());
-        } catch (err: any) {
-          console.error(err.message || 'Error saving data.');
+        } catch (err: unknown) {
+          console.error(err || 'Error saving data.');
         }
       };
       

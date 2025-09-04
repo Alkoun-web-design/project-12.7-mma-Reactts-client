@@ -59,7 +59,7 @@ const TestimonialsSlideshow: React.FC = () => {
         <p className="text-gray-600 italic">"{t.testimonial}"</p>
       </div>
       <div className="flex gap-2 mt-4 justify-center">
-        {data.map((_, i:number) => (
+        {data.map((i:number) => (
           <button
             key={i}
             className={`w-2.5 h-2.5 rounded-full transition-colors duration-200 border border-gray-300 focus:outline-none ${i === current ? 'bg-primary-600' : 'bg-gray-300'}`}

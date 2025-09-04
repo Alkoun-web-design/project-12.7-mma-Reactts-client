@@ -18,6 +18,20 @@ interface Tutor {
   avatar?: File | null;
 }
 
+interface TutorForm {
+  name: string;
+  email: string;
+  bio: string;
+  education: string;
+  subject_speciality: string;
+  teaching_style: string;
+  languages: string;
+  work_experience: string;
+  certifications: string;
+  achievements: string;
+  avatar: File | null;
+}
+
 interface AdminSectionProps {
   data: Tutor[];
   form: Tutor;
@@ -40,7 +54,7 @@ const TutorAdminSection: React.FC<AdminSectionProps> = ({
     const [loading, setLoading] = useState(true);
     const [avatar, setAvatar] = useState<File | null>(null);
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
-    const [form, setForm] = useState<any>({ 
+    const [form, setForm] = useState<TutorForm>({ 
       name: '', 
       email: '',
       bio: '', 
@@ -104,8 +118,8 @@ const TutorAdminSection: React.FC<AdminSectionProps> = ({
         setId(null);
         const refreshed = await fetch(`${serverAPI}tutors`, { credentials: 'include' });
         setData(await refreshed.json());
-      } catch (err: any) {
-        console.error(err.message || 'Error saving data.');
+      } catch (err: unknown) {
+        console.error(err || 'Error saving data.');
       }
     };
   

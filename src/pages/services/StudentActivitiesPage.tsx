@@ -86,7 +86,7 @@ const StudentActivitiesPage: React.FC = () => {
             
             <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-3">{pageContent.third_title}</h3>
             <ul className="list-disc pl-6 space-y-2 mb-6">
-              {pageContent.third_details.map((content, index:number) => (
+              {pageContent.third_details.map((content: {description:string}, index:number) => (
                 <li key={index}>{content.description}</li>
               ))}
             </ul>
@@ -97,7 +97,7 @@ const StudentActivitiesPage: React.FC = () => {
             </p>
             
             <ul className="list-disc pl-6 space-y-2 mb-6">
-              {pageContent.fourth_details.map((content, index:number) => (
+              {pageContent.fourth_details.map((content: {heading:string, description:string}, index:number) => (
                 <li key={index}><strong>{content.heading}</strong> {content.description}</li>
               ))}
             </ul>
@@ -108,7 +108,7 @@ const StudentActivitiesPage: React.FC = () => {
             </p>
             
             <ul className="list-disc pl-6 space-y-2">
-              {pageContent.fifth_details.map((content, index:number) => (
+              {pageContent.fifth_details.map((content: {description:string}, index:number) => (
                 <li key={index}>{content.description}</li>
               ))}
             </ul>
@@ -171,7 +171,7 @@ const StudentActivitiesPage: React.FC = () => {
           <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">{pageContent.seventh_title}</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {pageContent.seventh_details.map((content, index:number) => (
+            {pageContent.seventh_details.map((content: {heading:string, description:string}, index:number) => (
               <div key={index} className="bg-white p-6 rounded-xl">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">{content.heading}</h3>
                 <p className="text-gray-700 mb-4">

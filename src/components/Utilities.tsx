@@ -61,8 +61,8 @@ export const handleAddOrUpdateData = async (e: React.FormEvent, id: number | nul
     setId(null);
     const refreshed = await fetch(`http://localhost:5000/api/${apiEndpoint}`, { credentials: 'include' });
     setData(await refreshed.json());
-  } catch (err: any) {
-    console.error(err.message || 'Error saving data.');
+  } catch (err: unknown) {
+    console.error(err || 'Error saving data.');
   }
 };
 
@@ -73,8 +73,8 @@ export const handleDeleteData = async (id: number | null, apiEndpoint: string, s
       if (!res.ok) throw new Error(`Failed to delete data`);
       const refreshed = await fetch(`${serverAPI}${apiEndpoint}`, { credentials: 'include' });
       setData(await refreshed.json());
-    } catch (err: any) {
-      console.error(err.message || `Failed to delete data`);
+    } catch (err: unknown) {
+      console.error(err || `Failed to delete data`);
     }
   };
 

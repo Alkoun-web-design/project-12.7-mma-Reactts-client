@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { serverAPI } from '../Utilities';
 import { LucideArrowLeft } from 'lucide-react';
 
+
+interface PageContentProps {
+  page: string;
+  label: string;
+  setPage: (page: string) => void;
+}
 interface Details{
   icon: string;
   heading:  string;
@@ -46,14 +52,10 @@ interface Content {
   right_column_title?: string;
 }
 
-export default function PageContent ({
-  page,
-  label,
-  setPage
-}) {
+export default function PageContent ({ page, label, setPage }: PageContentProps ) {
 
   const [content, setContent ] = useState<Content[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [form, setForm] = useState<Content>({});
   const [saveStatus, setSaveStatus] = useState<string>('');
 
@@ -98,15 +100,16 @@ export default function PageContent ({
 
     const getPagesData = async () => {
       const api = `pages/${page}`
+      setLoading(true);
       try {
         const response = await fetch(`${serverAPI}${api}`);
         const data = await response.json();
         setContent(data);
         setForm(f => ({ ...f, ...data[0] }));
-        // setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+      setLoading(false);
     }
 
     getPagesData()
@@ -1024,11 +1027,11 @@ export default function PageContent ({
         {/* {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({ name: '', service_key: '', short_description: '', details: '', is_active: true }); }}>Cancel</button>} */}
       </form> }
 
+      <p className={`${saveStatus === 'Content saved successfully' ? 'text-green-500 m-2' : 'text-red-600 m-2'}`}>{saveStatus}</p>
+
     {/* <button className="btn btn-xs btn-primary" onClick={() => { setForm(service); setId(service.id); }}>Edit</button> */}
     {/* <button className="btn btn-xs btn-danger bg-red-600 text-white" type="button" onClick={() => handleDelete(service.id)}>Delete</button> */}
             
   </div>
 );
 }
-
-// export default PageContent;
