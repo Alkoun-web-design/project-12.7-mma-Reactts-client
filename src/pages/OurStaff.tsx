@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
 import { useQuery } from '@tanstack/react-query';
 import { handleGetPageContent, queryData, uploadsURL } from '../components/Utilities';
+import type { Content } from '../types/types'
 
 // Staff member type based on backend API
 interface Admin {
@@ -202,7 +203,7 @@ const StaffGrid: React.FC = () => {
 
 const OurStaff: React.FC = () => {
 
-  const [pageContent, setPageContent] = useState<any>(null);
+  const [pageContent, setPageContent] = useState<Content | null>(null);
   const [pageContentLoading, setPageContentLoading] = useState(true);
   
   useEffect(() => {
@@ -220,9 +221,9 @@ const OurStaff: React.FC = () => {
         </div> :
         <>
       <PageHeader
-        title={pageContent.main_title}
-        subtitle={pageContent.main_subtitle}
-        imageUrl={pageContent.main_background_image}
+        title={pageContent?.main_title}
+        subtitle={pageContent?.main_subtitle}
+        imageUrl={pageContent?.main_background_image}
       />
 
       <section className="mb-16">
@@ -233,7 +234,7 @@ const OurStaff: React.FC = () => {
           className="text-center mb-12"
         >
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            {pageContent.second_subtitle}
+            {pageContent?.second_subtitle}
           </p>
         </motion.div>
 
@@ -243,9 +244,9 @@ const OurStaff: React.FC = () => {
       <section className="mb-16">
         <div className="bg-primary-50 p-8 rounded-2xl">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">{pageContent.third_title}</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">{pageContent?.third_title}</h2>
             <p className="text-gray-700 mb-6">
-              {pageContent.third_subtitle}
+              {pageContent?.third_subtitle}
             </p>
             <div className="flex justify-center">
               <a href="/get-in-touch" className="btn btn-primary">

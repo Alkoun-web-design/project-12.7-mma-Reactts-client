@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 interface PageHeaderProps {
-  title: string;
+  title?: string;
   subtitle?: string;
   imageUrl?: string;
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { User } from 'lucide-react';
-import { UserContext } from '../App';
+import { UserContext } from '../context/userContext';
 import { serverAPI, uploadsURL } from '../components/Utilities';
 
 const sidebarTabs = [
