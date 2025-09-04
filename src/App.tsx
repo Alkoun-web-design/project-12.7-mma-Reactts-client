@@ -1,4 +1,5 @@
-import { useState, createContext } from 'react';
+import { useState } from 'react';
+import { UserContext } from './context/userContext';
 import { Routes, 
   Route, 
   Outlet,
@@ -33,13 +34,9 @@ import AdminProfile from './pages/AdminProfile';
 interface User {
   id: number;
   userType: string;
+  email?: string;
+  name?: string;
 }
-interface UserContext {
-  user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
-}
-
-export const UserContext = createContext<UserContext | null>(null);
 
 export default function App() {
 const [user, setUser] = useState<User | null>(null);

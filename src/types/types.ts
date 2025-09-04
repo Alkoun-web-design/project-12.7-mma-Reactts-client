@@ -1,3 +1,15 @@
+export interface User {
+  id: number;
+  userType: string;
+  email?: string;
+  name?: string;
+}
+
+export interface UserContextType {
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+}
+
 export interface CoachingArea {
   id: number;
   title: string;
@@ -72,12 +84,14 @@ export interface StaffForm {
   avatar: File | null;
 };
 
-export interface User { 
-  id: number;  
-  email: string; 
-  password?: string;
-  user_type: "admin" | "tutor" | "counsellor";
-}
+
+
+// export interface User { 
+//   id: number;  
+//   email: string; 
+//   password?: string;
+//   user_type: "admin" | "tutor" | "counsellor";
+// }
 
 export interface Schedule { 
   id: number; 

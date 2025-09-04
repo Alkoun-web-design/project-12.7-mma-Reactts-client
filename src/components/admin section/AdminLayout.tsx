@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // import { SearchProvider } from '../Search/SearchContext';
 // import { SearchDialog, SearchButton } from '../Search/SearchDialog';
 // import { SearchKeyboardShortcut } from '../Search/SearchKeyboardShortcut';
-import { UserContext } from '../../App';
+import { UserContext } from '../../context/userContext';
 import { serverAPI } from '../Utilities';
 import Footer from '../Footer';
 

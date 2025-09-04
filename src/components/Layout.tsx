@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // import { SearchDialog, SearchButton } from './Search/SearchDialog';
 // import { SearchDialog2 } from './Search/SearchDialog2';
 // import { SearchKeyboardShortcut } from './Search/SearchKeyboardShortcut';
-import { UserContext } from '../App';
+import { UserContext } from '../context/userContext';
 import Footer from './Footer';
 import { serverAPI } from './Utilities';
 
