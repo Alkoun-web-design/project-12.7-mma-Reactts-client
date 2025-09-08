@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
 import { useQuery } from '@tanstack/react-query';
-import { handleGetPageContent, queryData, uploadsURL } from '../components/Utilities';
-import type { Content } from '../types/types'
+import { queryPageContent, queryData, uploadsURL } from '../components/Utilities';
+// import type { Content } from '../types/types'
 
 // Staff member type based on backend API
 interface Admin {
@@ -81,20 +81,20 @@ const StaffGrid: React.FC = () => {
   });
 
   const { data: tutors, isLoading: tutorsLoading, error: tutorsError }  = useQuery({ 
-      queryKey:['tutors'], 
-      queryFn:() => queryData('tutors'),
-      staleTime: 6 * 60 * 60 * 1000, 
-      gcTime: 24 * 60 * 60 * 1000,
-      refetchInterval: 6 * 60 * 60 * 1000,
-    });
+    queryKey:['tutors'], 
+    queryFn:() => queryData('tutors'),
+    staleTime: 6 * 60 * 60 * 1000, 
+    gcTime: 24 * 60 * 60 * 1000,
+    refetchInterval: 6 * 60 * 60 * 1000,
+  });
 
   const { data: counsellors, isLoading: counsellorsLoading, error: counsellorsError }  = useQuery({ 
-      queryKey:['counsellors'], 
-      queryFn:() => queryData('counsellors'),
-      staleTime: 6 * 60 * 60 * 1000, 
-      gcTime: 24 * 60 * 60 * 1000,
-      refetchInterval: 6 * 60 * 60 * 1000,
-    });
+    queryKey:['counsellors'], 
+    queryFn:() => queryData('counsellors'),
+    staleTime: 6 * 60 * 60 * 1000, 
+    gcTime: 24 * 60 * 60 * 1000,
+    refetchInterval: 6 * 60 * 60 * 1000,
+  });
 
   const navigate = useNavigate();
  
@@ -203,23 +203,34 @@ const StaffGrid: React.FC = () => {
 
 const OurStaff: React.FC = () => {
 
-  const [pageContent, setPageContent] = useState<Content | null>(null);
-  const [pageContentLoading, setPageContentLoading] = useState(true);
-  
-  useEffect(() => {
-    handleGetPageContent('our-staff', setPageContent, setPageContentLoading);
-  }, []);
+  const { data: pageContent, isLoading: pageContentLoading, error: pageContentError } = useQuery({
+    queryKey: ['ourstaff'], 
+    queryFn: () => queryPageContent('our-staff'),
+    staleTime: 6 * 60 * 60 * 1000, 
+    gcTime: 24 * 60 * 60 * 1000,
+    refetchInterval: 6 * 60 * 60 * 1000,
+  });
 
   return (
     <div>
-      { pageContentLoading ? 
+
+      { pageContentError && 
+        <div className="flex justify-center items-center min-h-screen">
+          <div className="text-center">
+            <p className="mt-4 text-lg text-red-600">Eroor loading page.</p>
+          </div>
+        </div> }
+
+      { pageContentLoading && 
         <div className="flex justify-center items-center min-h-screen">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500 mx-auto"></div>
             <p className="mt-4 text-lg text-gray-600">Loading Page...</p>
           </div>
-        </div> :
-        <>
+        </div> }
+        
+       {pageContent && 
+       <>
       <PageHeader
         title={pageContent?.main_title}
         subtitle={pageContent?.main_subtitle}

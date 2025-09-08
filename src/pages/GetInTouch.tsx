@@ -3,10 +3,19 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import PageHeader from '../components/PageHeader';
 import { useQuery } from '@tanstack/react-query';
-import { queryPageContent, handleFormSubmit } from '../components/Utilities';
+import { queryPageContent, serverAPI } from '../components/Utilities';
+
+interface GetInTouchForm  {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+  interest: string;
+}
 
 const GetInTouch: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<GetInTouchForm>({
     name: '',
     email: '',
     phone: '',
@@ -29,6 +38,37 @@ const GetInTouch: React.FC = () => {
     gcTime: 24 * 60 * 60 * 1000,
     refetchInterval: 6 * 60 * 60 * 1000,
   });
+
+  // (e, formData, setSubmitting, setSuccess, setFormData )
+
+  const handleFormSubmit = async (e: React.FormEvent, formData: GetInTouchForm, setSubmitting:React.Dispatch<React.SetStateAction<boolean>>, setSuccess:React.Dispatch<React.SetStateAction<boolean>>, setFormData:React.Dispatch<React.SetStateAction<GetInTouchForm>> ) => {
+    e.preventDefault();
+    setSubmitting(true);
+    
+    try {
+      const response = await fetch(`${serverAPI}contact/enquiry-form`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+        credentials: 'include',
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong');
+      }
+      
+      setSuccess(true);
+      setFormData(formData);
+    } catch (error) {
+      console.error('An error occurred:', error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div>
@@ -138,7 +178,7 @@ const GetInTouch: React.FC = () => {
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h2 className="text-2xl font-semibold mb-6 text-gray-900">Send Us a Message</h2>
                 
-                <form onSubmit={(e) => {handleFormSubmit(e, formData, setSubmitting, setSuccess, setFormData )}} className="space-y-4">
+                <form onSubmit={e => handleFormSubmit(e, formData, setSubmitting, setSuccess, setFormData)} className="space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                       Your Name <span className="text-red-500">*</span>

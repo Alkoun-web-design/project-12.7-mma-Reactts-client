@@ -2,25 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { handleGetData, serverAPI, uploadsURL } from '../Utilities';
 import { User } from 'lucide-react';
 
-interface Tutor {
-  user_id: number;
-  name: string;
-  bio: string;
-  education: string;
-  subject_speciality: string;
-  teaching_style: string;
-  languages: string;
-  work_experience: string;
-  certifications: string;
-  achievements: string;
-  email: string;
-  avatar_url: string | undefined;
-  avatar?: File | null;
-}
-
 interface TutorForm {
   name: string;
-  email: string;
   bio: string;
   education: string;
   subject_speciality: string;
@@ -29,14 +12,20 @@ interface TutorForm {
   work_experience: string;
   certifications: string;
   achievements: string;
+  email: string;
   avatar: File | null;
+}
+
+interface Tutor extends TutorForm {
+  user_id: number;
+  avatar_url: string | undefined;
 }
 
 interface AdminSectionProps {
   data: Tutor[];
-  form: Tutor;
+  form: TutorForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: TutorForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
@@ -192,7 +181,7 @@ const TutorAdminSection: React.FC<AdminSectionProps> = ({
           </div>
       </div>
       {id && <button className="btn btn-primary btn-sm h-12 my-auto" type="submit">Update Tutor</button>}
-      {id && <button type="button" className="btn btn-secondary btn-sm h-12 my-auto" onClick={() => { setId(null); setForm({ name: '', email: '', bio: '', education: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar_url: ''}); setAvatarPreview(null); }}>Cancel</button>}
+      {id && <button type="button" className="btn btn-secondary btn-sm h-12 my-auto" onClick={() => { setId(null); setForm({ name: '', email: '', bio: '', education: '', subject_speciality: '', teaching_style: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar: null}); setAvatarPreview(null); }}>Cancel</button>}
     </form>
     <table className="min-w-full text-sm overflow-x-scroll">
       <thead>

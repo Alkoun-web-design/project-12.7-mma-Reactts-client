@@ -3,9 +3,7 @@ import { serverAPI, uploadsURL, handleGetData} from '../Utilities';
 import { User } from 'lucide-react';
 
 
-// Define types for counsellor member
-interface CounsellorMember {
-  user_id: number;
+interface CounsellorForm {
   name: string;
   email: string;
   bio: string;
@@ -14,14 +12,17 @@ interface CounsellorMember {
   work_experience: string;
   certifications: string;
   achievements: string;
+  avatar: File | null;
+}
+interface CounsellorMember extends CounsellorForm {
+  user_id: number;
   avatar_url: string | undefined;
-  avatar?: File | null;
 }
 interface AdminSectionProps {
   data: CounsellorMember[];
-  form: any;
+  form: CounsellorForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: CounsellorForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
@@ -39,7 +40,7 @@ const CounsellorAdminSection: React.FC<AdminSectionProps> = ({
     const [loading, setLoading] = useState(true);
     const [avatar, setAvatar] = useState<File | null>(null);
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
-    const [form, setForm] = useState<any>({ 
+    const [form, setForm] = useState<CounsellorForm>({ 
       name: '', 
       email: '',
       bio: '', 
@@ -162,7 +163,7 @@ const CounsellorAdminSection: React.FC<AdminSectionProps> = ({
             />
           </div>
       {id && <button className="btn btn-primary btn-sm h-12 my-auto" type="submit">Update Counsellor</button>}
-      {id && <button type="button" className="btn btn-secondary btn-sm h-12 my-auto" onClick={() => { setId(null); setForm({ name: '', email: '', bio: '', education: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar_url: ''}); setAvatarPreview(null); }}>Cancel</button>}
+      {id && <button type="button" className="btn btn-secondary btn-sm h-12 my-auto" onClick={() => { setId(null); setForm({ name: '', email: '', bio: '', education: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar: null}); setAvatarPreview(null); }}>Cancel</button>}
     </form>
     <table className="min-w-full text-sm">
       <thead>

@@ -45,7 +45,7 @@ export const queryPageContent = async (apiEndpoint:string ) => {
 
 
   // const handleDataSubmit = async (e: React.FormEvent, Id: number | null, setId: any, apiEndpoint: string, setForm: any, filledForm: any, blankForm: any, setData: any, setError: any) => {
-  
+
 // export const handleAddOrUpdateData = async (e: React.FormEvent, id: number | null, setId: React.Dispatch<React.SetStateAction<number | null>>, apiEndpoint: string, setForm: React.Dispatch<any>, form: any, blankForm: any, setData: React.Dispatch<React.SetStateAction<any[]>>) => {
 //   e.preventDefault();
 //   try {
