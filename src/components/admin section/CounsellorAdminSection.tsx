@@ -1,23 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { serverAPI, uploadsURL, handleGetData} from '../Utilities';
 import { User } from 'lucide-react';
-
-
-interface CounsellorForm {
-  name: string;
-  email: string;
-  bio: string;
-  education: string;
-  languages: string;
-  work_experience: string;
-  certifications: string;
-  achievements: string;
-  avatar: File | null;
-}
-interface CounsellorMember extends CounsellorForm {
-  user_id: number;
-  avatar_url: string | undefined;
-}
+import type { CounsellorForm, CounsellorMember } from '../../types/types';
 interface AdminSectionProps {
   data: CounsellorMember[];
   form: CounsellorForm;

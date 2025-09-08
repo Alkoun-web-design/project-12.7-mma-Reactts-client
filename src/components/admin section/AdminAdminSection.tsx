@@ -1,25 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { User } from 'lucide-react';
 import { handleGetData, serverAPI, uploadsURL } from '../Utilities';
+import type {Admin, AdminForm} from '../../types/types';
 
-interface Admin {
-  user_id: number;
-  name: string;
-  email: string;
-  bio?: string;
-  education?: string;
-  languages?: string;
-  work_experience?: string;
-  certifications?: string;
-  achievements?: string;
-  avatar_url: string | null;
-  avatar?: File | undefined;
-}
 interface AdminSectionProps {
   data: Admin[];
-  form: any;
+  form: AdminForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: AdminForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
@@ -39,7 +27,7 @@ const AdminAdminSection: React.FC<AdminSectionProps> = ({
     const [loading, setLoading] = useState(true);
     const [avatar, setAvatar] = useState<File | null>(null);
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
-    const [form, setForm] = useState<any>({ 
+    const [form, setForm] = useState<AdminForm>({ 
       name: '', 
       email: '',
       bio: '', 
@@ -167,7 +155,7 @@ const AdminAdminSection: React.FC<AdminSectionProps> = ({
           </div>
       </div>
       {id && <button className="btn btn-primary btn-sm h-12 my-auto" type="submit">Update Admin</button>}
-      {id && <button type="button" className="btn btn-secondary btn-sm h-12 my-auto" onClick={() => { setId(null); setForm({ name: '', email: '', bio: '', education: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar_url: ''}); setAvatarPreview(null); }}>Cancel</button>}
+      {id && <button type="button" className="btn btn-secondary btn-sm h-12 my-auto" onClick={() => { setId(null); setForm({ name: '', email: '', bio: '', education: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar: null}); setAvatarPreview(null); }}>Cancel</button>}
     </form>
     <div className='overflow-x-auto'>
       <table className="text-sm">

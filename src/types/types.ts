@@ -32,31 +32,55 @@ export interface Faq {
   category: string;
 }
 
-export interface Admin {
-  id: number;
+export interface AdminForm {
   name: string;
   email: string;
   bio: string;
-  education: string | null;
-  languages: string | null;
-  work_experience: string | null;
-  certifications: string | null;
-  achievements: string | null;
+  education: string;
+  languages: string;
+  work_experience: string;
+  certifications: string;
+  achievements: string;
+  avatar: File | null;
+}
+
+export interface Admin extends AdminForm{
+  user_id: number;
   avatar_url: string | null;
 }
-export interface Tutor {
-  id: number;
+
+export interface CounsellorForm {
   name: string;
   email: string;
-  subject_speciality: string | null;
   bio: string;
-  education: string | null;
-  teaching_style: string | null;
-  languages: string | null;
-  work_experience: string | null;
-  certifications: string | null;
-  achievements: string | null;
-  avatar_url: string | null;
+  education: string;
+  languages: string;
+  work_experience: string;
+  certifications: string;
+  achievements: string;
+  avatar: File | null;
+}
+export interface CounsellorMember extends CounsellorForm {
+  user_id: number;
+  avatar_url: string | undefined;
+}
+export interface TutorForm {
+  name: string;
+  bio: string;
+  education: string;
+  subject_speciality: string;
+  teaching_style: string;
+  languages: string;
+  work_experience: string;
+  certifications: string;
+  achievements: string;
+  email: string;
+  avatar: File | null;
+}
+
+export interface Tutor extends TutorForm {
+  user_id: number;
+  avatar_url: string | undefined;
 }
 
 export interface Counsellor {

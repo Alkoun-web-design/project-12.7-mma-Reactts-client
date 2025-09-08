@@ -18,6 +18,8 @@ import TestimonialsAdminSection from '../components/admin section/TestimonialsAd
 import FaqsAdminSection from '../components/admin section/FaqsAdminSection';
 import PricingAdminSection from '../components/admin section/PricingAdminSection';
 import ServicePricingAdminSection from '../components/admin section/ServicePricingAdminSection.';
+import type { Admin, CounsellorMember, Tutor } from '../types/types'
+
 
 const sidebarTabs = [
   { id: 'pages', label: 'Pages' },
@@ -47,48 +49,6 @@ interface User {
   email: string; 
   password?: string;
   user_type: "admin" | "tutor" | "counsellor";
-}
-interface CounsellorMember {
-  id: number;
-  name: string;
-  email: string;
-  bio: string;
-  education: string;
-  languages: string;
-  work_experience: string;
-  certifications: string;
-  achievements: string;
-  avatar_url: string | null;
-  password: string;
-}
-
-interface Admin {
-  id: number;
-  name: string;
-  email: string;
-  bio: string;
-  education: string;
-  languages: string;
-  work_experience: string;
-  certifications: string;
-  achievements: string;
-  password: string;
-  avatar_url: string | null;
-}
-interface Tutor {
-  id: number;
-  name: string;
-  bio: string;
-  education: string;
-  subject_speciality: string;
-  teaching_style: string;
-  languages: string;
-  work_experience: string;
-  certifications: string;
-  achievements: string;
-  avatar_url: string | null;
-  email: string;
-  password: string;
 }
 
 interface Schedule { 
