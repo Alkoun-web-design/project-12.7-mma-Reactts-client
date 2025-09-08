@@ -1,20 +1,20 @@
 export const serverAPI = import.meta.env.VITE_API_BASE_URL;
 export const uploadsURL = import.meta.env.VITE_UPLOADS_URL;
 
-// export const handleGetData = async (apiEndpoint:string, setData: React.Dispatch<React.SetStateAction<any>>,  setLoading:React.Dispatch<React.SetStateAction<boolean>>) => {
-//   setLoading(true);
-//   try {
-//     const res = await fetch(`${serverAPI}${apiEndpoint}`, { credentials: 'include' });
-//     if (!res.ok) throw new Error(await res.text() || `Failed to fetch data`);
-//     const data = await res.json();
-//     setData(data);
-//   } catch (err) {
-//     setData([]);
-//     console.error(`Error fetching data:`, err);
-//   } finally {
-//     setLoading(false);
-//   }
-// };
+export const handleGetData = async (apiEndpoint:string, setData: React.Dispatch<React.SetStateAction<any>>,  setLoading:React.Dispatch<React.SetStateAction<boolean>>) => {
+  setLoading(true);
+  try {
+    const res = await fetch(`${serverAPI}${apiEndpoint}`, { credentials: 'include' });
+    if (!res.ok) throw new Error(await res.text() || `Failed to fetch data`);
+    const data = await res.json();
+    setData(data);
+  } catch (err) {
+    setData([]);
+    console.error(`Error fetching data:`, err);
+  } finally {
+    setLoading(false);
+  }
+};
 
 export const queryData = async (apiEndpoint:string) => { 
     const res = await fetch(`${serverAPI}${apiEndpoint}`, { credentials: 'include' });
