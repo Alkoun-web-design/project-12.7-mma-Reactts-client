@@ -4,40 +4,33 @@ import { handleGetData, serverAPI, uploadsURL } from '../Utilities';
 import type {Admin, AdminForm} from '../../types/types';
 
 interface AdminSectionProps {
-  data: Admin[];
-  form: AdminForm;
-  id: number | null;
-  setForm: (form: AdminForm) => void;
-  setId: (id: number | null) => void;
-  handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent) => void;
-  // handleEdit: (user: User) => void;
-  handleDelete: (id: number) => void;
+  // data: Admin[];
+  // form: AdminForm;
+  // id: number | null;
+  // setForm: (form: AdminForm) => void;
+  // setId: (id: number | null) => void;
+  // handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // handleSubmit: (e: React.FormEvent) => void;
+  // // handleEdit: (user: User) => void;
+  // handleDelete: (id: number) => void;
+  apiEndpoint: string;
 }
 
-  // const blankAdminsForm = { id: 0, name: '', bio: '', education: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar_url: '', email: '' }
+  const blankForm = { name: '', bio: '', education: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar: null, email: '' }
 
 const AdminAdminSection: React.FC<AdminSectionProps> = ({
-  id,
-  setId,
-  handleDelete,
+  // id,
+  // setId,
+  // handleDelete,
+  apiEndpoint
 }) => {
       
     const [data, setData] = useState<Admin[]>([]);
+    const [id, setId] = useState<number | null>(null);
     const [loading, setLoading] = useState(true);
     const [avatar, setAvatar] = useState<File | null>(null);
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
-    const [form, setForm] = useState<AdminForm>({ 
-      name: '', 
-      email: '',
-      bio: '', 
-      education: '', 
-      languages: '', 
-      work_experience: '', 
-      certifications: '', 
-      achievements: '', 
-      avatar: avatar 
-    });
+    const [form, setForm] = useState<AdminForm>(blankForm);
 
     useEffect(() => { 
       handleGetData(`admins`, setData, setLoading);
@@ -75,8 +68,8 @@ const AdminAdminSection: React.FC<AdminSectionProps> = ({
       try {
         const method = id ? 'PUT' : 'POST';
         const url = id
-          ? `${serverAPI}admins/${id}`
-          : `${serverAPI}admins`;
+          ? `${serverAPI}${apiEndpoint}/${id}`
+          : `${serverAPI}${apiEndpoint}`;
         const response = await fetch(url, {
           method,
           credentials: 'include',
@@ -91,6 +84,18 @@ const AdminAdminSection: React.FC<AdminSectionProps> = ({
         console.error(err || 'Error saving data.');
       }
     };
+
+    const handleDelete = async (id:number) => {
+          if (!window.confirm(`Delete this data`)) return;
+          try {
+            const res = await fetch(`${serverAPI}${apiEndpoint}/${id}`, { method: 'DELETE', credentials: 'include' });
+            if (!res.ok) throw new Error(`Failed to delete data`);
+            const refreshed = await fetch(`${serverAPI}${apiEndpoint}`, { credentials: 'include' });
+            setData(await refreshed.json());
+          } catch (err: unknown) {
+            console.error(err || `Failed to delete data`);
+          }
+        };
   
 
   return (

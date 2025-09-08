@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { handleGetData, serverAPI } from '../Utilities';
-import type { User, UserForm} from '../../types/types'
+import type { User, UserForm} from '../../types/types';
 
 interface AdminSectionProps {
-  data: User[];
-  form: UserForm;
-  id: number | null;
-  setForm: (form: UserForm) => void;
-  setId: (id: number | null) => void;
-  handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent) => void;
-  handleDelete: (id: number) => void;
+  // data: User[];
+  // form: UserForm;
+  // id: number | null;
+  // setForm: (form: UserForm) => void;
+  // setId: (id: number | null) => void;
+  // handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // handleSubmit: (e: React.FormEvent) => void;
+  // handleDelete: (id: number) => void;
+  apiEndpoint: string;
 }
 
+// const blankUsersForm = { email: '', user_type: 'tutor', password: '' };
+
+
 const UsersAdminSection: React.FC<AdminSectionProps> = ({
-  id,
-    setId,
-    handleDelete,
-  }) => {
+    // id,
+    // setId,
+    // handleDelete,
+    apiEndpoint }) => {
         
       const [data, setData] = useState<User[]>([]);
+      const [id, setId] = useState<number | null>(null);
       const [loading, setLoading] = useState(true);
       const [form, setForm] = useState<UserForm>({ 
         email: '',
@@ -28,8 +33,8 @@ const UsersAdminSection: React.FC<AdminSectionProps> = ({
       });
   
       useEffect(() => { 
-        handleGetData(`users`, setData, setLoading);
-      }, [id]);
+        handleGetData( apiEndpoint, setData, setLoading);
+      }, [id, apiEndpoint]);
   
       const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -40,8 +45,8 @@ const UsersAdminSection: React.FC<AdminSectionProps> = ({
         try {
           const method = id ? 'PUT' : 'POST';
           const url = id
-            ? `${serverAPI}users/${id}`
-            : `${serverAPI}users`;
+            ? `${serverAPI}${apiEndpoint}/${id}`
+            : `${serverAPI}${apiEndpoint}`;
           const response = await fetch(url, {
             method,
             headers: {'Content-Type': 'application/json'},
@@ -51,12 +56,24 @@ const UsersAdminSection: React.FC<AdminSectionProps> = ({
           if (!response.ok) throw new Error('Failed to save data');
           setForm(f => ({ ...f, ...data }));
           setId(null);
-          const refreshed = await fetch(`${serverAPI}users`, { credentials: 'include' });
+          const refreshed = await fetch(`${serverAPI}${apiEndpoint}`, { credentials: 'include' });
           setData(await refreshed.json());
         } catch (err: unknown) {
           console.error(err || 'Error saving data.');
         }
       };
+
+  const handleDelete = async (id:number) => {
+    if (!window.confirm(`Delete this data`)) return;
+    try {
+      const res = await fetch(`${serverAPI}${apiEndpoint}/${id}`, { method: 'DELETE', credentials: 'include' });
+      if (!res.ok) throw new Error(`Failed to delete data`);
+      const refreshed = await fetch(`${serverAPI}${apiEndpoint}`, { credentials: 'include' });
+      setData(await refreshed.json());
+    } catch (err: unknown) {
+      console.error(err || `Failed to delete data`);
+    }
+  };
       
   return (
   <div className="w-full bg-white rounded-lg shadow p-8">

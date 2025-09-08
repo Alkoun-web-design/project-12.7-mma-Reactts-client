@@ -4,40 +4,34 @@ import { User } from 'lucide-react';
 import type { Tutor, TutorForm } from '../../types/types'
 
 interface AdminSectionProps {
-  data: Tutor[];
-  form: TutorForm;
-  id: number | null;
-  setForm: (form: TutorForm) => void;
-  setId: (id: number | null) => void;
-  handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent) => void;
-  // handleEdit: (user: User) => void;
-  handleDelete: (id: number) => void;
+  // data: Tutor[];
+  // form: TutorForm;
+  // id: number | null;
+  // setForm: (form: TutorForm) => void;
+  // setId: (id: number | null) => void;
+  // handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // handleSubmit: (e: React.FormEvent) => void;
+  // // handleEdit: (user: User) => void;
+  // handleDelete: (id: number) => void;
+  apiEndpoint: string;
 }
 
+  const blankForm = { name: '', bio: '', education: '', subject_speciality: '', teaching_style: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar: null, email: '' };
+
+
 const TutorAdminSection: React.FC<AdminSectionProps> = ({
-  id,
-  setId,
-  handleDelete,
+  // id,
+  // setId,
+  // handleDelete,
+  apiEndpoint
 }) => {
       
-    const [data, setData] = useState<Tutor[]>([]);
+  const [data, setData] = useState<Tutor[]>([]);
+        const [id, setId] = useState<number | null>(null);
     const [loading, setLoading] = useState(true);
     const [avatar, setAvatar] = useState<File | null>(null);
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
-    const [form, setForm] = useState<TutorForm>({ 
-      name: '', 
-      email: '',
-      bio: '', 
-      education: '', 
-      subject_speciality: '',
-      teaching_style: '',
-      languages: '', 
-      work_experience: '', 
-      certifications: '', 
-      achievements: '', 
-      avatar: avatar 
-    });
+    const [form, setForm] = useState<TutorForm>(blankForm);
 
     useEffect(() => { 
       handleGetData(`tutors`, setData, setLoading);
@@ -93,6 +87,18 @@ const TutorAdminSection: React.FC<AdminSectionProps> = ({
         console.error(err || 'Error saving data.');
       }
     };
+
+    const handleDelete = async (id:number) => {
+          if (!window.confirm(`Delete this data`)) return;
+          try {
+            const res = await fetch(`${serverAPI}${apiEndpoint}/${id}`, { method: 'DELETE', credentials: 'include' });
+            if (!res.ok) throw new Error(`Failed to delete data`);
+            const refreshed = await fetch(`${serverAPI}${apiEndpoint}`, { credentials: 'include' });
+            setData(await refreshed.json());
+          } catch (err: unknown) {
+            console.error(err || `Failed to delete data`);
+          }
+        };
   
   return (
   <div className="w-full bg-white rounded-lg shadow p-8">

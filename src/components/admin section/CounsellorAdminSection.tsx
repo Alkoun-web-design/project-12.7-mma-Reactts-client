@@ -2,39 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { serverAPI, uploadsURL, handleGetData} from '../Utilities';
 import { User } from 'lucide-react';
 import type { CounsellorForm, CounsellorMember } from '../../types/types';
+
 interface AdminSectionProps {
-  data: CounsellorMember[];
-  form: CounsellorForm;
-  id: number | null;
-  setForm: (form: CounsellorForm) => void;
-  setId: (id: number | null) => void;
-  handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent) => void;
-  // handleEdit: (user: User) => void;
-  handleDelete: (id: number) => void;
+  // data: CounsellorMember[];
+  // form: CounsellorForm;
+  // id: number | null;
+  // setForm: (form: CounsellorForm) => void;
+  // setId: (id: number | null) => void;
+  // handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // handleSubmit: (e: React.FormEvent) => void;
+  // // handleEdit: (user: User) => void;
+  // handleDelete: (id: number) => void;
+  apiEndpoint: string;
 }
 
+  const blankForm = { name: '', bio: '', education: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar: null, email: '' }
+
 const CounsellorAdminSection: React.FC<AdminSectionProps> = ({
-  id,
-  setId,
-  handleDelete,
+  // id,
+  // setId,
+  // handleDelete,
+  apiEndpoint
 }) => {
       
-    const [data, setData] = useState<CounsellorMember[]>([]);
-    const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<CounsellorMember[]>([]);
+        const [id, setId] = useState<number | null>(null);   
+        const [loading, setLoading] = useState(true);
     const [avatar, setAvatar] = useState<File | null>(null);
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
-    const [form, setForm] = useState<CounsellorForm>({ 
-      name: '', 
-      email: '',
-      bio: '', 
-      education: '', 
-      languages: '', 
-      work_experience: '', 
-      certifications: '', 
-      achievements: '', 
-      avatar: avatar 
-    });
+    const [form, setForm] = useState<CounsellorForm>(blankForm);
 
     useEffect(() => { 
       handleGetData(`counsellors`, setData, setLoading);
@@ -72,8 +68,8 @@ const CounsellorAdminSection: React.FC<AdminSectionProps> = ({
       try {
         const method = id ? 'PUT' : 'POST';
         const url = id
-          ? `${serverAPI}counsellors/${id}`
-          : `${serverAPI}counsellors`;
+          ? `${serverAPI}${apiEndpoint}/${id}`
+          : `${serverAPI}${apiEndpoint}`;
         const response = await fetch(url, {
           method,
           credentials: 'include',
@@ -82,12 +78,24 @@ const CounsellorAdminSection: React.FC<AdminSectionProps> = ({
         if (!response.ok) throw new Error('Failed to save data');
         setForm(f => ({ ...f, ...data }));
         setId(null);
-        const refreshed = await fetch(`${serverAPI}counsellors`, { credentials: 'include' });
+        const refreshed = await fetch(`${serverAPI}${apiEndpoint}`, { credentials: 'include' });
         setData(await refreshed.json());
       } catch (err: unknown) {
         console.error(err || 'Error saving data.');
       }
     };
+
+    const handleDelete = async (id:number) => {
+          if (!window.confirm(`Delete this data`)) return;
+          try {
+            const res = await fetch(`${serverAPI}${apiEndpoint}/${id}`, { method: 'DELETE', credentials: 'include' });
+            if (!res.ok) throw new Error(`Failed to delete data`);
+            const refreshed = await fetch(`${serverAPI}${apiEndpoint}`, { credentials: 'include' });
+            setData(await refreshed.json());
+          } catch (err: unknown) {
+            console.error(err || `Failed to delete data`);
+          }
+        };
   
 
   return (
