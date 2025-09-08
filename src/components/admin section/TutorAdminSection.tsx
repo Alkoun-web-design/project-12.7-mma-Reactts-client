@@ -1,25 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { handleGetData, serverAPI, uploadsURL } from '../Utilities';
 import { User } from 'lucide-react';
-
-interface TutorForm {
-  name: string;
-  bio: string;
-  education: string;
-  subject_speciality: string;
-  teaching_style: string;
-  languages: string;
-  work_experience: string;
-  certifications: string;
-  achievements: string;
-  email: string;
-  avatar: File | null;
-}
-
-interface Tutor extends TutorForm {
-  user_id: number;
-  avatar_url: string | undefined;
-}
+import type { Tutor, TutorForm } from '../../types/types'
 
 interface AdminSectionProps {
   data: Tutor[];
