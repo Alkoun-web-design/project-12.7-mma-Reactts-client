@@ -1,22 +1,14 @@
 import React from 'react';
-
-interface EducationalService {
-  id: number;
-  name: string;
-  service_key: string;
-  short_description: string;
-  details: string;
-  is_active: number;
-}
+import type { EducationalServiceForm, EducationalService } from '../../types/types';
 
 interface AdminSectionProps {
   data: EducationalService[];
-  form: any;
+  form: EducationalServiceForm;
   id: number | null;
   error?: string | null;
-  setForm: (form: any) => void;
+  setForm: (form: EducationalServiceForm) => void;
   setId: (id: number | null) => void;
-  // handleFormChange: (e: React.ChangeEvent) => void;
+  handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
   handleDelete: (id: number) => void;
 }
@@ -28,7 +20,7 @@ const EducationalServicesAdminSection: React.FC<AdminSectionProps> = ({
   error,
   setForm,
   setId,
-  // handleFormChange,
+  handleFormChange,
   handleSubmit,
   handleDelete
 }) => (
@@ -39,27 +31,27 @@ const EducationalServicesAdminSection: React.FC<AdminSectionProps> = ({
     {error && <div className="text-red-600 mb-2">{error}</div>}
     <form className="text-sm mb-4 flex gap-2 flex-wrap" onSubmit={handleSubmit}>
       <div>
-        <input name="name" value={form.name} onChange={e => setForm((f: any) => ({ ...f, name: e.target.value }))} placeholder="Name" className="border rounded px-2 py-1" required />
+        <input name="name" value={form.name} onChange={handleFormChange} placeholder="Name" className="border rounded px-2 py-1" required />
         <div className="text-xs text-gray-400 mt-1">Name of the educational service</div>
       </div>
       <div>
-        <input name="service_key" value={form.service_key} onChange={e => setForm((f: any) => ({ ...f, service_key: e.target.value }))} placeholder="Key" className="border rounded px-2 py-1" required />
+        <input name="service_key" value={form.service_key} onChange={handleFormChange} placeholder="Key" className="border rounded px-2 py-1" required />
         <div className="text-xs text-gray-400 mt-1">Unique key for the service</div>
       </div>
       <div>
-        <input name="short_description" value={form.short_description} onChange={e => setForm((f: any) => ({ ...f, short_description: e.target.value }))} placeholder="Short Description" className="border rounded px-2 py-1" />
+        <input name="short_description" value={form.short_description} onChange={handleFormChange} placeholder="Short Description" className="border rounded px-2 py-1" />
         <div className="text-xs text-gray-400 mt-1">Brief description of the service</div>
       </div>
       <div>
-        <input name="details" value={form.details} onChange={e => setForm((f: any) => ({ ...f, details: e.target.value }))} placeholder="Details" className="border rounded px-2 py-1" />
+        <input name="details" value={form.details} onChange={handleFormChange} placeholder="Details" className="border rounded px-2 py-1" />
         <div className="text-xs text-gray-400 mt-1">Detailed information about the service</div>
       </div>
       <div>
-        <input name="is_active" value={form.is_active} onChange={e => setForm((f: any) => ({ ...f, details: e.target.value }))} placeholder="Is the service Active" className="border rounded px-2 py-1" />
+        <input name="is_active" value={form.is_active} onChange={handleFormChange} placeholder="Is the service Active" className="border rounded px-2 py-1" />
         <div className="text-xs text-gray-400 mt-1">1 for Yes, 0 for No </div>
       </div>
       <button className="btn btn-primary btn-sm" type="submit">{id ? 'Update' : 'Add'} Service</button>
-      {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({ name: '', service_key: '', short_description: '', details: '', is_active: true }); }}>Cancel</button>}
+      {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({ name: '', service_key: '', short_description: '', details: '', is_active: 0 }); }}>Cancel</button>}
     </form>
     <table className="min-w-full text-sm">
       <thead>

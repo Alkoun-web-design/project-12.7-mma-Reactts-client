@@ -1,21 +1,12 @@
 import React from 'react';
+import type { Schedule, ScheduleForm } from '../../types/types';
 
-interface Schedule {
-  id: number;
-  subject_id: number;
-  tutor_id: number;
-  timing: string;
-  timeframe: string;
-  description: string;
-  status: 'Now Enrolling' | 'Starting Next Month' | 'Enrollment Closed';
-
-}
 
 interface AdminSectionProps {
   data: Schedule[];
-  form: any;
+  form: ScheduleForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: ScheduleForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
@@ -65,7 +56,7 @@ const SchedulesAdminSection: React.FC<AdminSectionProps> = ({
         <div className="text-xs text-gray-400 mt-1">Now Enrolling / Starting Next Month / Enrollment Closed</div>
       </div>
       <button className="btn btn-primary btn-sm" type="submit">{id ? 'Update' : 'Add'} Schedule</button>
-        {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({ subject_id: 0, tutor_id: 0, timing: '', timeframe: '', description: '', status: '' })}}>Cancel</button>}
+        {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({ subject_id: 0, tutor_id: 0, timing: '', timeframe: '', description: '', status: 'Now Enrolling'})}}>Cancel</button>}
     </form>
     <table className="min-w-full text-sm">
       <thead>

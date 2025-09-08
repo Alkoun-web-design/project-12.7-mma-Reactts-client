@@ -1,8 +1,12 @@
-export interface User {
-  id: number;
-  userType: string;
+export interface UserForm {
+  user_type: string; // "admin" | "tutor" | "counsellor";
+  password?: string;
   email?: string;
   name?: string;
+}
+
+export interface User extends UserForm { 
+  id: number;
 }
 
 export interface UserContextType {
@@ -10,26 +14,69 @@ export interface UserContextType {
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
-export interface CoachingArea {
+export interface EducationalServiceForm {
+  name: string;
+  service_key: string;
+  short_description: string;
+  details: string;
+  is_active: number;
+}
+
+export interface EducationalService extends EducationalServiceForm {
   id: number;
-  title: string;
+}
+
+export interface StudentActivityForm { 
+  name: string; 
+  age_group: string; 
   description: string;
-  benefits: string[];
-  logo: string | null;
+  image_url: string;
+  is_active: number;
 }
 
-export interface Testimonial {
+export interface StudentActivity extends StudentActivityForm { 
   id: number;
+}
+export interface CoachingAreaForm { 
+  title: string; 
+  description: string; 
+  benefits: string;
+  logo: string;
+}
+
+export interface CoachingArea extends CoachingAreaForm { 
+  id: number;
+}
+
+export interface LanguageForm {
+  name: string;
+  code: string;
+  is_active: boolean;
+}
+
+export interface Language extends LanguageForm {
+  id: number;
+}
+
+export interface TestimonialForm {
   student_name: string;
+  success_stories: string;
   testimonial: string;
-  success_stories?: string;
+  service_id: string;
 }
 
-export interface Faq {
+export interface Testimonial extends TestimonialForm { 
   id: number;
+}
+
+export interface FaqForm {
   question: string;
   answer: string;
-  category: string;
+  category_name: string;
+}
+
+export interface Faq extends FaqForm {
+  id: number;
 }
 
 export interface AdminForm {
@@ -108,60 +155,78 @@ export interface StaffForm {
   avatar: File | null;
 };
 
-
-
-// export interface User { 
-//   id: number;  
-//   email: string; 
-//   password?: string;
-//   user_type: "admin" | "tutor" | "counsellor";
-// }
-
-export interface Schedule { 
-  id: number; 
+export interface ScheduleForm {
   subject_id: number;
   tutor_id: number;
-  timing: string; 
+  timing: string;
   timeframe: string;
   description: string;
-  status: "Now Enrolling" | "Starting Next Month" | "Enrollment Closed";
+  status: string; //'Now Enrolling' | 'Starting Next Month' | 'Enrollment Closed'
 }
 
-export interface PricingPlan {
-  id: number;
-  name: string;
-  description: string;
-  price: string;
-  features: string[];
-  popular?: boolean;
-  linkTo: string;
-  annualPrice?: string;
-  annualDescription?: string;
+export interface Schedule extends ScheduleForm { 
+  id: number; 
+}
+export interface PricingForm { 
+  name: string; 
+  description: string; 
+  price: string; 
+  annual_price: string;
+  annual_description: string;
+  features: string; 
+  popular: number;
+  link_to: string;
+  order_index: number;
+  is_active: number;
 }
 
-export interface ServicePricing {
+export interface Pricing extends PricingForm {
   id: number;
+}
+
+export interface ServicePricingForm {
   service: string;
-  description: string;
   individual: string;
   package: string;
-  linkTo: string;
+  link_to: string;
+  order_index: number;
+  is_active: number;
 }
 
-export interface TestPrepOption {
+export interface ServicePricing extends ServicePricingForm {
   id: number;
+}
+
+export interface AcademicResourceForm {  
+  category_title: string; 
+  description: string;
+  icon: string; 
+  features: string;
+}
+
+export interface AcademicResource extends AcademicResourceForm {
+  id: number;
+}
+
+export interface TestPrepOptionForm {
   test: string;
   description: string;
   format: string;
   duration: string;
   features: string[];
-  is_active: boolean;
+  is_active: number;
+}
+export interface TestPrepOption extends TestPrepOptionForm {
+  id: number;
 }
 
-export interface Subject { 
-    id: number; 
-    name: string; 
-    level: string; 
+export interface SubjectForm {
+  name: string;
+  level: string;
+}
+
+export interface Subject extends SubjectForm {
+  id: number;
 }
 
 export interface Details{

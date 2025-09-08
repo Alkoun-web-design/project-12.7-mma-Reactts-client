@@ -1,24 +1,15 @@
 import React from 'react';
-
-interface ServicePricing {
-  id: number;
-  service: string;
-  individual: string;
-  package: string;
-  link_to: string;
-  order_index: number;
-  is_active: number;
-}
+import type { ServicePricing, ServicePricingForm} from '../../types/types'
+ 
 
 interface AdminSectionProps {
   data: ServicePricing[];
-  form: any;
+  form: ServicePricingForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: ServicePricingForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
-  // handleEdit: (user: User) => void;
   handleDelete: (id: number) => void;
 }
 
@@ -30,7 +21,6 @@ const ServicePricingAdminSection: React.FC<AdminSectionProps> = ({
   setId,
   handleFormChange,
   handleSubmit,
-  // handleEdit: (user: User) => void;
   handleDelete,
 }) => (
   <div className="w-full bg-white rounded-lg shadow p-8">
@@ -65,7 +55,7 @@ const ServicePricingAdminSection: React.FC<AdminSectionProps> = ({
         <div className="text-xs text-gray-400 mt-1">1 for Yes, 0 for No </div>
       </div>
       <button className="btn btn-primary btn-sm" type="submit">{id ? 'Update' : 'Add'} Service Price</button>
-      {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({ name: '', code: '', is_active: true }); }}>Cancel</button>}
+      {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({ service: '', individual: '', package: '', link_to: '', order_index: 0, is_active: 0 }); }}>Cancel</button>}
     </form>
     <table className="min-w-full text-sm">
       <thead>

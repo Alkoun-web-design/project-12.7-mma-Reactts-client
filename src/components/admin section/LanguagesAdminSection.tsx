@@ -1,17 +1,12 @@
 import React from 'react';
+import type { Language, LanguageForm } from '../../types/types';
 
-interface Language {
-  id: number;
-  name: string;
-  code: string;
-  is_active: boolean;
-}
 
 interface AdminSectionProps {
   data: Language[];
-  form: any;
+  form: LanguageForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: LanguageForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;

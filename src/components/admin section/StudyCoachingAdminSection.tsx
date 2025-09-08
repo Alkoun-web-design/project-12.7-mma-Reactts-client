@@ -1,17 +1,11 @@
 import React from 'react';
+import type { CoachingArea, CoachingAreaForm} from '../../types/types';
 
-interface CoachingArea { 
-  id: number; 
-  title: string; 
-  description: string; 
-  benefits: string;
-  logo: string;
-}
 interface AdminSectionProps {
   data: CoachingArea[];
-  form: any;
+  form: CoachingAreaForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: CoachingAreaForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
@@ -42,7 +36,7 @@ const StudyCoachingAdminSection: React.FC<AdminSectionProps> = ({
         <div className="text-xs text-gray-400 mt-1">Name of the coaching area</div>
       </div>
       <div>
-        <input name="description" value={form.plan_description} onChange={handleFormChange} placeholder="Description" className="border rounded px-2 py-1" required />
+        <input name="description" value={form.description} onChange={handleFormChange} placeholder="Description" className="border rounded px-2 py-1" required />
         <div className="text-xs text-gray-400 mt-1">Describe the coaching area</div>
         </div>
         <div>        

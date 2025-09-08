@@ -1,26 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { handleGetData, serverAPI } from '../Utilities';
-
-
-interface User { 
-  id: number;  
-  email: string; 
-  password?: string;
-  user_type: "admin" | "tutor" | "counsellor";
-}
-
-interface UserForm {
-  email: string; 
-  password?: string;
-  user_type: string;
-}
-
+import type { User, UserForm} from '../../types/types'
 
 interface AdminSectionProps {
   data: User[];
-  form: any;
+  form: UserForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: UserForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
@@ -38,7 +24,7 @@ const UsersAdminSection: React.FC<AdminSectionProps> = ({
       const [form, setForm] = useState<UserForm>({ 
         email: '',
         password: '',
-        user_type: '',
+        user_type: 'tutor',
       });
   
       useEffect(() => { 
@@ -94,7 +80,7 @@ const UsersAdminSection: React.FC<AdminSectionProps> = ({
         <div className="text-xs text-gray-500">Must be 'admin', 'tutor' or 'counsellor'</div>
       </div>
       <button className="btn btn-primary btn-sm my-2" type="submit">{id ? 'Update' : 'Add'} User</button>
-      {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({email: '', user_type: '', password: '' }); }}>Cancel</button>}
+      {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({email: '', user_type: 'tutor', password: '' }); }}>Cancel</button>}
     </form>
     {!data && <div className="text-red-600 mb-2">There was a problem with loading the data.</div>}    
     <table className="min-w-full text-sm">

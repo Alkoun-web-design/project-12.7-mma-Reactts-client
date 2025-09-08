@@ -1,17 +1,11 @@
 import React from 'react';
-
-type Faq = {
-  id: number;
-  question: string;
-  answer: string;
-  category_name: string;
-}
+import type {Faq, FaqForm} from '../../types/types';
 
 interface AdminSectionProps {
   data: Faq[];
-  form: any;
+  form: FaqForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: FaqForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
@@ -40,11 +34,11 @@ const FaqsAdminSection: React.FC<AdminSectionProps> = ({
         <div className="text-xs text-gray-400 mt-1">Question</div>
       </div>
       <div>
-        <input name="answer" value={form.description} onChange={handleFormChange} placeholder="Answer" className="border rounded px-2 py-1" required />
+        <input name="answer" value={form.answer} onChange={handleFormChange} placeholder="Answer" className="border rounded px-2 py-1" required />
         <div className="text-xs text-gray-400 mt-1">Answer</div>
       </div>
       <div>        
-        <input name="categor_name" value={form.category_namet} onChange={handleFormChange} placeholder="Category Name" className="border rounded px-2 py-1" required />
+        <input name="categor_name" value={form.category_name} onChange={handleFormChange} placeholder="Category Name" className="border rounded px-2 py-1" required />
         <div className="text-xs text-gray-400 mt-1">Name of the cateogry of the question and answer</div>
       </div>
       <button className="btn btn-primary btn-sm" type="submit">{id ? 'Update' : 'Add'} FAQ</button>

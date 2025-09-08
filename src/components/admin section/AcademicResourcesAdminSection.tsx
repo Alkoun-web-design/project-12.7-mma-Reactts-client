@@ -1,21 +1,14 @@
 import React from 'react';
+import type { AcademicResource, AcademicResourceForm } from '../../types/types'
 
-interface AcademicResource { 
-  id: number; 
-  category_title: string; 
-  description: string;
-  icon: string; 
-  features: string;
-}
 interface AdminSectionProps {
   data: AcademicResource[];
-  form: any;
+  form: AcademicResourceForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: AcademicResourceForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
-  // handleEdit: (user: User) => void;
   handleDelete: (id: number) => void;
 }
 
@@ -27,7 +20,6 @@ const AcademicResourcesAdminSection = ({
   setId,
   handleFormChange,
   handleSubmit,
-  // handleEdit: (user: User) => void;
   handleDelete,
 }: AdminSectionProps) => (
   <div className="w-full bg-white rounded-lg shadow p-8">

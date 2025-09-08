@@ -1,24 +1,14 @@
 import React from 'react';
-
-interface TestPrepOption {
-  id: number;
-  test: string;
-  description: string;
-  format: string;
-  duration: string;
-  features: string[];
-  is_active: boolean;
-}
+import type { TestPrepOption, TestPrepOptionForm} from '../../types/types'
 
 interface AdminSectionProps {
   data: TestPrepOption[];
-  form: any;
+  form: TestPrepOptionForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: TestPrepOptionForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
-  // handleEdit: (user: User) => void;
   handleDelete: (id: number) => void;
 }
 
@@ -30,7 +20,6 @@ const StandardizedTestPrepAdminSection: React.FC<AdminSectionProps> = ({
   setId,
   handleFormChange,
   handleSubmit,
-  // handleEdit: (user: User) => void;
   handleDelete,
 }) => (
   <div className="w-full bg-white rounded-lg shadow p-8">
@@ -41,7 +30,7 @@ const StandardizedTestPrepAdminSection: React.FC<AdminSectionProps> = ({
     <form className="text-sm mb-4 flex gap-2 flex-wrap" onSubmit={handleSubmit}>
       <div>
         {/* <input name="name" value={form.name} onChange={e => setForm((f: any) => ({ ...f, name: e.target.value }))} placeholder="Name" className="border rounded px-2 py-1" required /> */}
-        <input name="name" value={form.name} onChange={handleFormChange} placeholder="Name" className="border rounded px-2 py-1" required />
+        <input name="name" value={form.test} onChange={handleFormChange} placeholder="Name" className="border rounded px-2 py-1" required />
         <div className="text-xs text-gray-400 mt-1">Name of the Test</div>
       </div>
       <div>
@@ -66,7 +55,7 @@ const StandardizedTestPrepAdminSection: React.FC<AdminSectionProps> = ({
         <div className="text-xs text-gray-400 mt-1">1 for Yes, 0 for No</div>
       </div>
       <button className="btn btn-primary btn-sm" type="submit">{id ? 'Update' : 'Add'} Test</button>
-      {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({  test: '', description: '', format: '', duration: '', features: '', is_active:'' })}}>Cancel</button>}
+      {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({  test: '', description: '', format: '', duration: '', features: [], is_active: 0 })}}>Cancel</button>}
     </form>
     <table className="min-w-full text-sm">
       <thead>

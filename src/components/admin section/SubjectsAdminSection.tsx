@@ -1,15 +1,11 @@
 import React from 'react';
-interface Subject {
-  id: number;
-  name: string;
-  level: string;
-}
+import type { Subject, SubjectForm }  from '../..//types/types';
 
 interface AdminSectionProps {
   data: Subject[];
-  form: any;
+  form: SubjectForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: SubjectForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;

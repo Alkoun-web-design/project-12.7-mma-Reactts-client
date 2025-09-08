@@ -1,27 +1,14 @@
 import React from 'react';
+import type { Pricing, PricingForm} from '../../types/types'
 
-interface Pricing { 
-  id: number; 
-  name: string; 
-  description: string; 
-  price: string; 
-  annual_price: string;
-  annual_description: string;
-  features: string; 
-  popular: number;
-  link_to: string;
-  order_index: number;
-  is_active: number;
-}
 interface AdminSectionProps {
   data: Pricing[];
-  form: any;
+  form: PricingForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: PricingForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
-  // handleEdit: (user: User) => void;
   handleDelete: (id: number) => void;
 }
 
@@ -33,7 +20,6 @@ const PricingAdminSection: React.FC<AdminSectionProps> = ({
   setId,
   handleFormChange,
   handleSubmit,
-  // handleEdit: (user: User) => void;
   handleDelete,
 }) => (
   <div className="w-full bg-white rounded-lg shadow p-8">
@@ -44,11 +30,11 @@ const PricingAdminSection: React.FC<AdminSectionProps> = ({
     <form className="text-sm mb-4 flex gap-2 flex-wrap" onSubmit={handleSubmit}>
       <div>
         {/* <input name="name" value={form.name} onChange={e => setForm((f: any) => ({ ...f, name: e.target.value }))} placeholder="Name" className="border rounded px-2 py-1" required /> */}
-        <input name="name" value={form.plan_name} onChange={handleFormChange} placeholder="Plan Name" className="border rounded px-2 py-1" required />
+        <input name="name" value={form.name} onChange={handleFormChange} placeholder="Plan Name" className="border rounded px-2 py-1" required />
         <div className="text-xs text-gray-400 mt-1">Name of the price plan</div>
       </div>
       <div>
-        <input name="plan_description" value={form.plan_description} onChange={handleFormChange} placeholder="Plan Description" className="border rounded px-2 py-1" required />
+        <input name="plan_description" value={form.description} onChange={handleFormChange} placeholder="Plan Description" className="border rounded px-2 py-1" required />
         <div className="text-xs text-gray-400 mt-1">Describe the plan</div>
       </div>
       <div>        
@@ -81,7 +67,7 @@ const PricingAdminSection: React.FC<AdminSectionProps> = ({
         <div className="text-xs text-gray-400 mt-1">1 for Yes, 0 for No</div>
       </div>
       <button className="btn btn-primary btn-sm" type="submit">{id ? 'Update' : 'Add'} Price Plan</button>
-        {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({  name: '', description: '', price: '',   annual_price: '', annual_description: '', features: '', popular: '', link_to: '', order_index: '', is_active:'' })}}>Cancel</button>}
+        {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({  name: '', description: '', price: '',   annual_price: '', annual_description: '', features: '', popular: 0, link_to: '', order_index: 0, is_active: 0 })}}>Cancel</button>}
     </form>
     <div className='overflow-x-auto'>
     <table className="min-w-full text-sm">

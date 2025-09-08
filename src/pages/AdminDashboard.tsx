@@ -18,7 +18,13 @@ import TestimonialsAdminSection from '../components/admin section/TestimonialsAd
 import FaqsAdminSection from '../components/admin section/FaqsAdminSection';
 import PricingAdminSection from '../components/admin section/PricingAdminSection';
 import ServicePricingAdminSection from '../components/admin section/ServicePricingAdminSection.';
-import type { Admin, CounsellorMember, Tutor } from '../types/types'
+import type { Admin, AdminForm, CounsellorMember, CounsellorForm, 
+  Tutor, TutorForm, TestPrepOption, TestPrepOptionForm, Faq, FaqForm, User, UserForm,
+  Subject, SubjectForm, Schedule, ScheduleForm, EducationalService, EducationalServiceForm,
+  StudentActivity, StudentActivityForm, CoachingArea, CoachingAreaForm, Language, LanguageForm,
+  TestimonialForm, Testimonial, Pricing, PricingForm, ServicePricing, ServicePricingForm,
+  AcademicResource, AcademicResourceForm
+} from '../types/types'
 
 
 const sidebarTabs = [
@@ -41,65 +47,24 @@ const sidebarTabs = [
   { id: 'users', label: 'Users'},
 ];
 
-// Types for fetched data
-interface Subject { id: number; name: string; level: string; }
-
-interface User { 
-  id: number;  
-  email: string; 
-  password?: string;
-  user_type: "admin" | "tutor" | "counsellor";
-}
-
-interface Schedule { 
-  id: number; 
-  subject_id: number;
-  tutor_id: number;
-  timing: string; 
-  timeframe: string;
-  description: string;
-  status: "Now Enrolling" | "Starting Next Month" | "Enrollment Closed";
-}
-
-type FaqItem = {
-  id: number;
-  question: string;
-  answer: string;
-  category_id: number;
-  category_name: string;
-  category_slug: string;
-  created_at?: string;
-  updated_at?: string;
-}
-
-interface TestPrepOption {
-  id: number;
-  test: string;
-  description: string;
-  format: string;
-  duration: string;
-  features: string[];
-  is_active: boolean;
-}
-
 const AdminDashboard: React.FC = () => {
 
-  const blankUsersForm = { email: '', password: '', user_type: '' };
-  const blankTutorsForm = { name: '', bio: '', education: '', subject_speciality: '', teaching_style: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar_url: '', email: '' };
-  const blankAdminsForm = { name: '', bio: '', education: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar_url: '', email: '' }
-  const blankCounsellorsForm = { id: 0, name: '', bio: '', education: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar_url: '', email: '' }
-  const blankScheduleForm = { subject_id: '', teacher_id: '', timing: '', timeframe: '' };
+  const blankUsersForm = { email: '', user_type: 'tutor', password: '' };
+  const blankTutorsForm = { name: '', bio: '', education: '', subject_speciality: '', teaching_style: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar: null, email: '' };
+  const blankAdminsForm = { name: '', bio: '', education: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar: null, email: '' }
+  const blankCounsellorsForm = { name: '', bio: '', education: '', languages: '', work_experience: '', certifications: '', achievements: '', avatar: null, email: '' }
+  const blankScheduleForm = { subject_id: 0, tutor_id: 0, timing: '', timeframe: '', description: '', status: 'Now Enrolling' };
   const blankSubjectForm = { name: '', level: '' };
-  const blankTestimonialForm = { student_name: '', testimonial: '', service_id: '' };
+  const blankTestimonialForm = { student_name: '', success_stories: '', testimonial: '', service_id: '' };
   const blankLanguageForm = { name: '', code: '', is_active: true };
-  const blankEducationalServiceForm = { name: '', service_key: '', short_description: '', details: '', is_active: true };
-  const blankFaqForm = { question: '', answer: '', category_id: 0 };
-  const blankStudentActivityForm = { question: '', answer: '', category_id: 0 };
-  const blankTestPrepForm = { question: '', answer: '', category_id: 0 };
-  const blankCoachingAreaForm = { question: '', answer: '', category_id: 0 };
-  const blankPricingPlanForm = { question: '', answer: '', category_id: 0 };
-  const blankServicePricingForm = { question: '', answer: '', category_id: 0 };
-  const blankAcademicResourceForm = { question: '', answer: '', category_id: 0 };
+  const blankEducationalServiceForm = { name: '', service_key: '', short_description: '', details: '', is_active: 0 };
+  const blankFaqForm = { question: '', answer: '', category_name: '' };
+  const blankStudentActivityForm = { name: '', age_group: '', description: '', image_url: '', is_active: 0 }
+  const blankTestPrepForm = { test: '', description: '', format: '', duration: '', features: [], is_active: 0 };
+  const blankCoachingAreaForm = { title: '', description: '', benefits: '', logo: '' }
+  const blankPricingPlanForm = { name: '', description: '', price: '',   annual_price: '', annual_description: '', features: '', popular: 0, link_to: '', order_index: 0, is_active: 0 };
+  const blankServicePricingForm = { service: '', individual: '', package: '', link_to: '', order_index: 0, is_active: 0 };
+  const blankAcademicResourceForm = { category_title: '', description: '', icon: '', features: '' };
 
     // Dashboard Settings
   const [selectedTab, setSelectedTab] = useState('pages');
@@ -107,55 +72,55 @@ const AdminDashboard: React.FC = () => {
   const [tutors, setTutors] = useState<Tutor[]>([]);
   const [counsellors, setCounsellors] = useState<CounsellorMember[]>([]);
   const [users, setUsers] = useState<User[]>([]);
-  const [studentActivities, setStudentActivities] = useState<any[]>([]);
-  const [coachingAreas, setCoachingAreas] = useState<any[]>([]);
-  const [pricingPlans, setPricingPlans] = useState<any[]>([]);
-  const [servicePricing, setServicePricing] = useState<any[]>([]);
-  const [academicResources, setAcademicResources] = useState<any[]>([]);
+  const [studentActivities, setStudentActivities] = useState<StudentActivity[]>([]);
+  const [coachingAreas, setCoachingAreas] = useState<CoachingArea[]>([]);
+  const [pricingPlans, setPricingPlans] = useState<Pricing[]>([]);
+  const [servicePricing, setServicePricing] = useState<ServicePricing[]>([]);
+  const [academicResources, setAcademicResources] = useState<AcademicResource[]>([]);
 
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [schedules, setSchedules] = useState<Schedule[]>([]);
-  const [testimonials, setTestimonials] = useState<any[]>([]);
-  const [educationalServices, setEducationalServices] = useState<any[]>([]);
-  const [languages, setLanguages] = useState<any[]>([]);  
-  const [faqs, setFaqs] = useState<FaqItem[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [educationalServices, setEducationalServices] = useState<EducationalService[]>([]);
+  const [languages, setLanguages] = useState<Language[]>([]);  
+  const [faqs, setFaqs] = useState<Faq[]>([]);
   const [testPrepOptions, setTestPrepOptions] = useState<TestPrepOption[]>([]);
 
   const [loading, setLoading] = useState(false);
 
 
   // States for forms and Ids
-  const [usersForm, setUsersForm] = useState<any>(blankUsersForm);
+  const [usersForm, setUsersForm] = useState<UserForm>(blankUsersForm);
   const [userId, setUserId] = useState<number | null>(null);
-  const [adminForm, setAdminForm] = useState<any>(blankAdminsForm);
+  const [adminForm, setAdminForm] = useState<AdminForm>(blankAdminsForm);
   const [adminId, setAdminId] = useState<number | null>(null);
-  const [tutorForm, setTutorForm] = useState<any>(blankTutorsForm);
+  const [tutorForm, setTutorForm] = useState<TutorForm>(blankTutorsForm);
   const [tutorId, setTutorId] = useState<number | null>(null);
-  const [counsellorForm, setCounsellorForm] = useState<any>(blankCounsellorsForm);
+  const [counsellorForm, setCounsellorForm] = useState<CounsellorForm>(blankCounsellorsForm);
   const [counsellorId, setCounsellorId] = useState<number | null>(null);
-  const [faqForm, setFaqForm] = useState<any>(blankFaqForm);
+  const [faqForm, setFaqForm] = useState<FaqForm>(blankFaqForm);
   const [faqId, setFaqId] = useState<number | null>(null);
-  const [educationalServiceForm, setEducationalServiceForm] = useState<any>(blankEducationalServiceForm);
+  const [educationalServiceForm, setEducationalServiceForm] = useState<EducationalServiceForm>(blankEducationalServiceForm);
   const [educationalServiceId, setEducationalServiceId] = useState<number | null>(null);
-  const [languageForm, setLanguageForm] = useState<any>(blankLanguageForm);
+  const [languageForm, setLanguageForm] = useState<LanguageForm>(blankLanguageForm);
   const [languageId, setLanguageId] = useState<number | null>(null);
-  const [testimonialForm, setTestimonialForm] = useState<any>(blankTestimonialForm);
+  const [testimonialForm, setTestimonialForm] = useState<TestimonialForm>(blankTestimonialForm);
   const [testimonialId, setTestimonialId] = useState<number | null>(null);
-  const [subjectForm, setSubjectForm] = useState<any>(blankSubjectForm);
+  const [subjectForm, setSubjectForm] = useState<SubjectForm>(blankSubjectForm);
   const [subjectId, setSubjectId] = useState<number | null>(null);
-  const [scheduleForm, setScheduleForm] = useState<any>(blankScheduleForm);
+  const [scheduleForm, setScheduleForm] = useState<ScheduleForm>(blankScheduleForm);
   const [scheduleId, setScheduleId] = useState<number | null>(null);
-  const [studentActivityForm, setStudentActivityForm] = useState<any>(blankStudentActivityForm);
+  const [studentActivityForm, setStudentActivityForm] = useState<StudentActivityForm>(blankStudentActivityForm);
   const [studentActivityId, setStudentActivityId] =useState<number | null>(null);
-  const [testPrepForm, setTestPrepForm] = useState<any>(blankTestPrepForm);
+  const [testPrepForm, setTestPrepForm] = useState<TestPrepOptionForm>(blankTestPrepForm);
   const [testPrepId, setTestPrepId] = useState<number | null>(null); 
-  const [coachingAreaForm, setCoachingAreaForm] = useState<any>(blankCoachingAreaForm);
+  const [coachingAreaForm, setCoachingAreaForm] = useState<CoachingAreaForm>(blankCoachingAreaForm);
   const [coachingAreaId, setCoachingAreaId] = useState<number | null>(null);
-  const [pricingPlanForm, setPricingPlanForm] = useState<any>(blankPricingPlanForm);
+  const [pricingPlanForm, setPricingPlanForm] = useState<PricingForm>(blankPricingPlanForm);
   const [pricingPlanId, setPricingPlanId] = useState<number | null>(null); 
-  const [servicePricingForm, setServicePricingForm] = useState<any>(blankServicePricingForm);  
+  const [servicePricingForm, setServicePricingForm] = useState<ServicePricingForm>(blankServicePricingForm);  
   const [servicePricingId, setServicePricingId] = useState<number | null>(null); 
-  const [academicResourceForm, setAcademicResourceForm] = useState<any>(blankAcademicResourceForm);  
+  const [academicResourceForm, setAcademicResourceForm] = useState<AcademicResourceForm>(blankAcademicResourceForm);  
   const [academicResourceId, setAcademicResourceId] = useState<number | null>(null); 
 
   useEffect(() => {
@@ -218,7 +183,6 @@ const AdminDashboard: React.FC = () => {
             setForm={setFaqForm}
             setId={setFaqId}
             handleFormChange={(e:React.ChangeEvent<HTMLInputElement>) => handleFormChange(e, setFaqForm, faqForm)}
-            // handleEdit={handleEdit}
             handleSubmit={(e:React.FormEvent) =>handleAddOrUpdateData(e, faqId, setFaqId, 'faqs', setFaqForm, faqForm, blankFaqForm, setFaqs )}
             handleDelete={(id:number) => handleDeleteData(id, 'faqs', setFaqs)}
           />
@@ -243,7 +207,7 @@ const AdminDashboard: React.FC = () => {
             setForm={setAdminForm}
             setId={setAdminId}
             handleFormChange={(e:React.ChangeEvent<HTMLInputElement>) => handleFormChange(e, setAdminForm, adminForm)}
-            handleSubmit={(e:React.FormEvent) => handleAddOrUpdateData(e, adminId, setAdminId, 'admins', setAdminForm, adminForm, blankAdminsForm, setAdminForm)}
+            handleSubmit={(e:React.FormEvent) => handleAddOrUpdateData(e, adminId, setAdminId, 'admins', setAdminForm, adminForm, blankAdminsForm, setAdmins)}
             handleDelete={(id:number) => handleDeleteData(id, 'admins', setAdmins)}
           />
         )}
@@ -290,8 +254,7 @@ const AdminDashboard: React.FC = () => {
             id={educationalServiceId}
             setForm={setEducationalServiceForm}
             setId={setEducationalServiceId}
-            // handleFormChange={(e:React.ChangeEvent<HTMLInputElement>) => handleFormChange(e, setLanguageForm, languageForm)}
-            // handleEdit={handleEdit}
+            handleFormChange={(e:React.ChangeEvent<HTMLInputElement>) => handleFormChange(e, setEducationalServiceForm, educationalServiceForm)}
             handleSubmit={(e:React.FormEvent) => handleAddOrUpdateData(e, educationalServiceId, setEducationalServiceId, 'educational-services', setEducationalServices, educationalServiceForm, blankEducationalServiceForm, setEducationalServices)}
             handleDelete={(id) => handleDeleteData(id, 'educational-services', setEducationalServices)}
           />
@@ -315,6 +278,7 @@ const AdminDashboard: React.FC = () => {
             id={testimonialId}
             setForm={setTestimonialForm}
             setId={setTestimonialId}
+            handleFormChange={(e:React.ChangeEvent<HTMLInputElement>) => handleFormChange(e, setTestimonialForm, testimonialForm)}
             handleSubmit={(e:React.FormEvent) =>handleAddOrUpdateData(e, testimonialId, setTestimonialId, 'testimonials', setTestimonialForm, testimonialForm, blankTestimonialForm, setTestimonials )}
             handleDelete={(id) => handleDeleteData(id, 'testimonials', setTestimonials)}
           />

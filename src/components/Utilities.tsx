@@ -46,28 +46,28 @@ export const queryPageContent = async (apiEndpoint:string ) => {
 
   // const handleDataSubmit = async (e: React.FormEvent, Id: number | null, setId: any, apiEndpoint: string, setForm: any, filledForm: any, blankForm: any, setData: any, setError: any) => {
 
-// export const handleAddOrUpdateData = async (e: React.FormEvent, id: number | null, setId: React.Dispatch<React.SetStateAction<number | null>>, apiEndpoint: string, setForm: React.Dispatch<any>, form: any, blankForm: any, setData: React.Dispatch<React.SetStateAction<any[]>>) => {
-//   e.preventDefault();
-//   try {
-//     const method = id ? 'PUT' : 'POST';
-//     const url = id
-//       ? `${serverAPI}${apiEndpoint}/${id}`
-//       : `${serverAPI}${apiEndpoint}`;
-//     const response = await fetch(url, {
-//       method,
-//       headers: { 'Content-Type': 'application/json' },
-//       credentials: 'include',
-//       body: JSON.stringify(form),
-//     });
-//     if (!response.ok) throw new Error('Failed to save data');
-//     setForm(blankForm);
-//     setId(null);
-//     const refreshed = await fetch(`http://localhost:5000/api/${apiEndpoint}`, { credentials: 'include' });
-//     setData(await refreshed.json());
-//   } catch (err: unknown) {
-//     console.error(err || 'Error saving data.');
-//   }
-// };
+export const handleAddOrUpdateData = async (e: React.FormEvent, id: number | null, setId: React.Dispatch<React.SetStateAction<number | null>>, apiEndpoint: string, setForm: React.Dispatch<any>, form: any, blankForm: any, setData: React.Dispatch<React.SetStateAction<any[]>>) => {
+  e.preventDefault();
+  try {
+    const method = id ? 'PUT' : 'POST';
+    const url = id
+      ? `${serverAPI}${apiEndpoint}/${id}`
+      : `${serverAPI}${apiEndpoint}`;
+    const response = await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(form),
+    });
+    if (!response.ok) throw new Error('Failed to save data');
+    setForm(blankForm);
+    setId(null);
+    const refreshed = await fetch(`http://localhost:5000/api/${apiEndpoint}`, { credentials: 'include' });
+    setData(await refreshed.json());
+  } catch (err: unknown) {
+    console.error(err || 'Error saving data.');
+  }
+};
 
 export const handleDeleteData = async (id: number | null, apiEndpoint: string, setData: React.Dispatch<React.SetStateAction<any[]>>) => {
     if (!window.confirm(`Delete this data`)) return;

@@ -1,22 +1,14 @@
 import React from 'react';
+import type { StudentActivity, StudentActivityForm} from '../../types/types';
 
-interface StudentActivity { 
-  id: number; 
-  name: string; 
-  age_group: string; 
-  description: string;
-  image_url: string;
-  is_active: number;
-}
 interface AdminSectionProps {
   data: StudentActivity[];
-  form: any;
+  form: StudentActivityForm;
   id: number | null;
-  setForm: (form: any) => void;
+  setForm: (form: StudentActivityForm) => void;
   setId: (id: number | null) => void;
   handleFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
-  // handleEdit: (user: User) => void;
   handleDelete: (id: number) => void;
 }
 
@@ -28,7 +20,6 @@ const StudentActiviitiesAdminSection: React.FC<AdminSectionProps> = ({
   setId,
   handleFormChange,
   handleSubmit,
-  // handleEdit: (user: User) => void;
   handleDelete,
 }) => (
   <div className="w-full bg-white rounded-lg shadow p-8">
@@ -60,7 +51,7 @@ const StudentActiviitiesAdminSection: React.FC<AdminSectionProps> = ({
         <div className="text-xs text-gray-400 mt-1">1 for Yes, 0 for No</div>
       </div>
       <button className="btn btn-primary btn-sm" type="submit">{id ? 'Update' : 'Add'} Student Activity</button>
-      {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({ name: '',age_group: '', description: '', image_url: '', is_active: '' }); }}>Cancel</button>}
+      {id && <button type="button" className="btn btn-secondary btn-sm" onClick={() => { setId(null); setForm({ name: '',age_group: '', description: '', image_url: '', is_active: 0 }); }}>Cancel</button>}
     </form>
     <table className="min-w-full text-sm">
       <thead>
