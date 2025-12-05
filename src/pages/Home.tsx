@@ -212,9 +212,9 @@ export default function Home () {
                       <Users size={24} />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold mb-2">{data.third_details[0].heading}</h3>
+                      <h3 className="text-lg font-semibold mb-2">{JSON.parse(data.third_details)[0].heading}</h3>
                       <p className="text-gray-600">
-                        {data.third_details[0].description}
+                        {JSON.parse(data.third_details)[0].description}
                       </p>
                     </div>
                   </div>
@@ -224,9 +224,9 @@ export default function Home () {
                       <BookOpen size={24} />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold mb-2">{data.third_details[1].heading}</h3>
+                      <h3 className="text-lg font-semibold mb-2">{JSON.parse(data.third_details)[1].heading}</h3>
                       <p className="text-gray-600">
-                        {data.third_details[1].description}
+                        {JSON.parse(data.third_details)[1].description}
                       </p>
                     </div>
                   </div>
@@ -236,9 +236,9 @@ export default function Home () {
                       <Award size={24} />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold mb-2">{data.third_details[2].heading}</h3>
+                      <h3 className="text-lg font-semibold mb-2">{JSON.parse(data.third_details)[2].heading}</h3>
                       <p className="text-gray-600">
-                        {data.third_details[2].description}
+                        {JSON.parse(data.third_details)[2].description}
                       </p>
                     </div>
                   </div>

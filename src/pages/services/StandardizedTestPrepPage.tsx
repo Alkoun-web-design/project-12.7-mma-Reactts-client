@@ -115,7 +115,7 @@ const StandardizedTestPrepPage: React.FC = () => {
             </p>
             
             <ol className="list-decimal pl-6 space-y-4 mb-6">
-              {pageContent.third_details.map((content: {heading:string, description:string}, index:number) => (
+              {JSON.parse(pageContent.third_details).map((content: {heading:string, description:string}, index:number) => (
                 <li key={index}>
                 <strong className="text-gray-900">{content.heading}</strong>
                 <p className="mt-1">{content.description}</p>
@@ -125,7 +125,7 @@ const StandardizedTestPrepPage: React.FC = () => {
             
             <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-3">{pageContent.fourth_title}</h3>
             <ul className="list-disc pl-6 space-y-2 mb-6">
-              {pageContent.fourth_details.map((content: {description:string}, index:number) => (
+              {JSON.parse(pageContent.fourth_details).map((content: {description:string}, index:number) => (
                 <li key={index}>{content.description}</li>
               ))}
             </ul>
@@ -136,7 +136,7 @@ const StandardizedTestPrepPage: React.FC = () => {
             </p>
             
             <ul className="list-disc pl-6 space-y-2">
-              {pageContent.fifth_details.map((content: {heading:string, description:string}, index:number) => (
+              {JSON.parse(pageContent.fifth_details).map((content: {heading:string, description:string}, index:number) => (
                 <li key={index}><strong>{content.heading}</strong> {content.description}</li>
               ))}
             </ul>
@@ -184,7 +184,7 @@ const StandardizedTestPrepPage: React.FC = () => {
                       <p className="text-gray-800">{option.duration}</p>
                     </div>
                   </div>
-                  <h4 className="font-medium text-gray-900 mb-3">Key Features:</h4>
+                  {/* <h4 className="font-medium text-gray-900 mb-3">Key Features:</h4>
                   <ul className="space-y-2">
                     {option.features.slice(0, expandedFeatures[option.id] ? undefined : 3).map((feature, i) => (
                       <li key={i} className="flex items-start">
@@ -192,7 +192,7 @@ const StandardizedTestPrepPage: React.FC = () => {
                         <span className="text-gray-700">{feature}</span>
                       </li>
                     ))}
-                  </ul>
+                  </ul> */}
                   
                   {option.features.length > 3 && (
                     <button
@@ -217,7 +217,7 @@ const StandardizedTestPrepPage: React.FC = () => {
         }
       </div>
       
-      <div className="mb-16">
+      {/* <div className="mb-16">
         <h2 className="section-title text-center">{pageContent.seventh_title}</h2>
         {testimonialsLoading && <div className="text-center text-gray-400">Loading...</div>}
         {testimonialsError && <div className="text-center text-red-500">Error loading testimonials.</div>}
@@ -278,7 +278,7 @@ const StandardizedTestPrepPage: React.FC = () => {
             </div>
           </div>
         }
-      </div>
+      </div> */}
       
       <div className="bg-primary-50 p-8 rounded-2xl mb-16">
         <div className="max-w-3xl mx-auto text-center">

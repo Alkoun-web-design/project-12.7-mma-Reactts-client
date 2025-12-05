@@ -145,8 +145,8 @@ const PricingPage: React.FC = () => {
 
                   <ul className="space-y-3 mb-8">
                     {plan.features && plan.features.length > 0 ? (
-                      plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2">
+                      JSON.parse(plan.features).map((feature, index) => (
+                        <li key={index} className="flex items-start gap-2">
                           <span className="text-green-500 mt-1 flex-shrink-0">
                             <Check size={16} />
                           </span>
@@ -273,7 +273,7 @@ const PricingPage: React.FC = () => {
             <h3 className="text-xl font-semibold text-gray-900 mb-4">{pageContent.fourth_title}</h3>
             <ul className="space-y-3">
 
-              {pageContent.fourth_details.map((content: {description:string}, index: number) => (
+              {JSON.parse(pageContent.fourth_details).map((content: {description:string}, index: number) => (
                 <li key={index} className="flex items-start gap-2">
                   <span className="text-primary-500 mt-1">
                     <Check size={16} />
@@ -294,7 +294,7 @@ const PricingPage: React.FC = () => {
           >
             <h3 className="text-xl font-semibold text-gray-900 mb-4">{pageContent.fifth_title}</h3>
             <ul className="space-y-3">
-              {pageContent.fifth_details.map((content: {description:string}, index: number) => (
+              {JSON.parse(pageContent.fifth_details).map((content: {description:string}, index: number) => (
                 <li key={index} className="flex items-start gap-2">
                   <span className="text-gray-500 mt-1">
                     <Check size={16} />

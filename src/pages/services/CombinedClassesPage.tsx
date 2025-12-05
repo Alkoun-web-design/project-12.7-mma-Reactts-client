@@ -98,13 +98,9 @@ const CombinedClassesPage: React.FC = () => {
             
             <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-3">{pageContent.third_title}</h3>
             <ul className="list-disc pl-6 space-y-2 mb-6">
-              <li>{pageContent.third_details[0].description}</li>
-              <li>{pageContent.third_details[1].description}</li>
-              <li>{pageContent.third_details[2].description}</li>
-              <li>{pageContent.third_details[3].description}</li>
-              <li>{pageContent.third_details[4].description}</li>
-              <li>{pageContent.third_details[5].description}</li>
-              <li>{pageContent.third_details[6].description}</li>
+              {JSON.parse(pageContent.third_details).map((content: {description: string}, index: number) => (
+                <li key={index}>{content.description}</li>
+              ))}
             </ul>
             
             <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-3">{pageContent.fourth_title}</h3>
@@ -113,11 +109,9 @@ const CombinedClassesPage: React.FC = () => {
             </p>
             
             <ul className="list-disc pl-6 space-y-2">
-              <li>{pageContent.fourth_details[0].description}</li>
-              <li>{pageContent.fourth_details[1].description}</li>
-              <li>{pageContent.fourth_details[2].description}</li>
-              <li>{pageContent.fourth_details[3].description}</li>
-              <li>{pageContent.fourth_details[4].description}</li>
+              {JSON.parse(pageContent.fourth_details).map((content: {description: string}, index: number) => (
+                <li key={index}>{content.description}</li>
+              ))}
             </ul>
           </div>
         </div>
@@ -181,7 +175,7 @@ const CombinedClassesPage: React.FC = () => {
         }
       </div>
       
-      <div className="bg-primary-50 p-8 rounded-2xl mb-16">
+      {/* <div className="bg-primary-50 p-8 rounded-2xl mb-16">
         <h2 className="section-title">{pageContent.sixth_title}</h2>
           {testimonialsLoading && <div className="text-center text-gray-400">Loading...</div>}
           {testimonialsError && <div className="text-center text-red-500">Error loading testimonials.</div>}
@@ -207,7 +201,7 @@ const CombinedClassesPage: React.FC = () => {
             ))}
           </div>
         }
-      </div>
+      </div> */}
       </>
       }
     </div>

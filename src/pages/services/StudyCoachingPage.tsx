@@ -129,7 +129,7 @@ const StudyCoachingPage: React.FC = () => {
             </p>
             
             <ol className="list-decimal pl-6 space-y-4 mb-6">
-              {pageContent.third_details.map((content: {heading:string, description:string}, index:number) => (
+              {JSON.parse(pageContent.third_details).map((content: {heading:string, description:string}, index:number) => (
                 <li key={index}>
                   <strong className="text-gray-900">{content.heading}</strong>
                   <p className="mt-1">{content.description}</p>
@@ -143,7 +143,7 @@ const StudyCoachingPage: React.FC = () => {
             </p>
             
             <ul className="list-disc pl-6 space-y-2 mb-6">
-              {pageContent.fourth_details.map((content: {description:string}, index:number) => (
+              {JSON.parse(pageContent.fourth_details).map((content: {description:string}, index:number) => (
                 <li key={index}>{content.description}</li>
               ))}
             </ul>
@@ -185,7 +185,7 @@ const StudyCoachingPage: React.FC = () => {
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-primary-600 mb-3">{area.title}</h3>
                   <p className="text-gray-700 mb-4">{area.description}</p>
-                  <h4 className="font-medium text-gray-900 mb-2">Key Benefits:</h4>
+                  {/* <h4 className="font-medium text-gray-900 mb-2">Key Benefits:</h4>
                   <ul className="space-y-1">
                     {area.benefits.slice(0, expandedFeatures[area.id] ? undefined : 3).map((benefit:string, i:number) => (
                       <li key={i} className="flex items-start">
@@ -193,7 +193,7 @@ const StudyCoachingPage: React.FC = () => {
                         <span className="text-gray-700">{benefit}</span>
                       </li>
                     ))}
-                  </ul>
+                  </ul> */}
                   
                   {area.benefits.length > 3 && (
                     <button
@@ -220,7 +220,7 @@ const StudyCoachingPage: React.FC = () => {
       
       <div className="bg-primary-50 p-8 rounded-2xl mb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
+          {/* <div>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">{pageContent.seventh_title}</h2>
             {testimonialsLoading && <div className="text-center text-gray-400">Loading...</div>}
             {testimonialsError && <div className="text-center text-red-500">Error loading testimonials.</div>}
@@ -246,7 +246,7 @@ const StudyCoachingPage: React.FC = () => {
                 ))}
               </div>
             }
-          </div>
+          </div> */}
           
           <div>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">{pageContent.eighth_title}</h2>

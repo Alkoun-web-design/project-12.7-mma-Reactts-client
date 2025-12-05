@@ -95,7 +95,7 @@ const AcademicResourcesPage: React.FC = () => {
             
             
             <div className="space-y-4 mb-6">
-              {pageContent.third_details.map((content :{description:string, heading:string, price:string}, index:number) => (
+              {JSON.parse(pageContent.third_details).map((content :{description:string, heading:string, price:string}, index:number) => (
                 <div key={index} className="bg-primary-50 p-4 rounded-lg">
                   <h4 className="font-semibold text-gray-900 mb-1">{content.heading}</h4>
                   <p className="text-gray-700">
@@ -113,7 +113,7 @@ const AcademicResourcesPage: React.FC = () => {
             </p>
             
             <ul className="list-disc pl-6 space-y-2">
-              {pageContent.fourth_details.map((content: {description:string}, index:number) => (
+              {JSON.parse(pageContent.fourth_details).map((content: {description:string}, index:number) => (
                 <li key={index}>{content.description}</li>
               ))}
             </ul>
@@ -169,7 +169,7 @@ const AcademicResourcesPage: React.FC = () => {
             {pageContent.sixth_subtitle}
           </p>
           <ul className="space-y-2">
-            {pageContent.sixth_details.map((content: {description:string}, index:number) => (
+            {JSON.parse(pageContent.sixth_details).map((content: {description:string}, index:number) => (
               <li key={index} className="flex items-start">
                 <span className="text-primary-500 mr-2">•</span>
                 <span className="text-gray-700">{content.description}</span>
@@ -190,7 +190,7 @@ const AcademicResourcesPage: React.FC = () => {
             {pageContent.seventh_subtitle}
           </p>
           <ul className="space-y-2">
-            {pageContent.seventh_details.map((content :{description:string}, index:number) => (
+            {JSON.parse(pageContent.seventh_details).map((content :{description:string}, index:number) => (
               <li key={index} className="flex items-start">
                 <span className="text-gray-500 mr-2">•</span>
                 <span className="text-gray-700">{content.description}</span>

@@ -24,6 +24,7 @@ export const queryData = async (apiEndpoint:string) => {
 export const queryPageContent = async (apiEndpoint:string ) => {
     const res = await fetch(`${serverAPI}pages/${apiEndpoint}`, { credentials: 'include' });
     const data = await res.json();
+    console.log(data)
     return data[0];
 };
 

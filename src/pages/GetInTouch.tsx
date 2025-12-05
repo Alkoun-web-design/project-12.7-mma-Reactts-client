@@ -83,7 +83,7 @@ const GetInTouch: React.FC = () => {
         { pageContentError && 
         <div className="flex justify-center items-center min-h-screen">
           <div className="text-center">
-            <p className="mt-4 text-lg text-red-600">Eroor loading page.</p>
+            <p className="mt-4 text-lg text-red-600">Error loading page.</p>
           </div>
         </div> }
 
@@ -113,9 +113,9 @@ const GetInTouch: React.FC = () => {
                   <Mail size={24} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium text-gray-900">{pageContent.second_details[0].heading}</h3>
-                  <p className="text-gray-600">{pageContent.second_details[0].description1}</p>
-                  <p className="text-gray-600">{pageContent.second_details[0].description2}</p>
+                  <h3 className="text-lg font-medium text-gray-900">{JSON.parse(pageContent.second_details)[0].heading}</h3>
+                  <p className="text-gray-600">{JSON.parse(pageContent.second_details)[0].description1}</p>
+                  <p className="text-gray-600">{JSON.parse(pageContent.second_details)[0].description2}</p>
                 </div>
               </div>
               
@@ -124,9 +124,9 @@ const GetInTouch: React.FC = () => {
                   <Phone size={24} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium text-gray-900">{pageContent.second_details[1].heading}</h3>
-                  <p className="text-gray-600">{pageContent.second_details[1].description1}</p>
-                  <p className="text-gray-600">{pageContent.second_details[1].description2}</p>
+                  <h3 className="text-lg font-medium text-gray-900">{JSON.parse(pageContent.second_details)[1].heading}</h3>
+                  <p className="text-gray-600">{JSON.parse(pageContent.second_details)[1].description1}</p>
+                  <p className="text-gray-600">{JSON.parse(pageContent.second_details)[1].description2}</p>
                 </div>
               </div>
               
@@ -135,8 +135,8 @@ const GetInTouch: React.FC = () => {
                   <MapPin size={24} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium text-gray-900">{pageContent.second_details[2].heading}</h3>
-                  <p className="text-gray-600">{pageContent.second_details[2].description1}</p>
+                  <h3 className="text-lg font-medium text-gray-900">{JSON.parse(pageContent.second_details)[2].heading}</h3>
+                  <p className="text-gray-600">{JSON.parse(pageContent.second_details)[2].description1}</p>
                   {/* <p className="text-gray-600">{pageContent.second_details[2].description2}</p> */}
                 </div>
               </div>
@@ -146,10 +146,10 @@ const GetInTouch: React.FC = () => {
                   <Clock size={24} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium text-gray-900">{pageContent.second_details[3].heading}</h3>
-                  <p className="text-gray-600">{pageContent.second_details[3].description1}</p>
-                  <p className="text-gray-600">{pageContent.second_details[3].description2}</p>
-                  <p className="text-gray-600">{pageContent.second_details[3].description3}</p>
+                  <h3 className="text-lg font-medium text-gray-900">{JSON.parse(pageContent.second_details)[3].heading}</h3>
+                  <p className="text-gray-600">{JSON.parse(pageContent.second_details)[3].description1}</p>
+                  <p className="text-gray-600">{JSON.parse(pageContent.second_details)[3].description2}</p>
+                  <p className="text-gray-600">{JSON.parse(pageContent.second_details)[3].description3}</p>
                 </div>
               </div>
             </div>

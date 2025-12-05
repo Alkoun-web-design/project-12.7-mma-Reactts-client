@@ -78,10 +78,14 @@ export default function Footer() {
                   <address className="not-italic text-gray-300">
                     {contactLoading && <div>Loading...</div>}
                     {contactError && <div>Error loading contact information.</div>}
-                    {contactData && 
-                    contactData.second_details.map((data: FooterDetails, index:number) =>(
-                        <p className='py-1  text-sm' key={index}>{data.heading}: {data.description1}</p>
-                    ))}
+                    {contactData && (
+                      <>
+                        <p className='py-1  text-sm'>Contact details:</p>
+                        {JSON.parse(contactData.second_details).map((data: {heading:string, description1:string}, index: number) => (
+                          <p key={index} className='py-1  text-sm'>{data.heading}: {data.description1}</p>  
+                        ))}
+                      </>
+                    )}
                   </address>
                 </div>
               </div>
