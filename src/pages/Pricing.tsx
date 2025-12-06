@@ -11,7 +11,7 @@ interface PricingPlan {
   name: string;
   description: string;
   price: string;
-  features: string[];
+  features: string;
   popular?: boolean;
   linkTo: string;
   annualPrice?: string;
