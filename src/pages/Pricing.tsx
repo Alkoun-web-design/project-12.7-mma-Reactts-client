@@ -145,7 +145,7 @@ const PricingPage: React.FC = () => {
 
                   <ul className="space-y-3 mb-8">
                     {plan.features && plan.features.length > 0 ? (
-                      JSON.parse(plan.features).map((feature, index) => (
+                      JSON.parse(plan.features).map((feature:string, index:number) => (
                         <li key={index} className="flex items-start gap-2">
                           <span className="text-green-500 mt-1 flex-shrink-0">
                             <Check size={16} />

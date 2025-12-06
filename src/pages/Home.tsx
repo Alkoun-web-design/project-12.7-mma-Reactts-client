@@ -1,98 +1,100 @@
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BookOpen, Users, Award, ChevronRight, ChevronLeft } from 'lucide-react';
-import { queryData, queryPageContent } from '../components/Utilities';
+// import { BookOpen, Users, Award, ChevronRight, ChevronLeft } from 'lucide-react';
+import { BookOpen, Users, Award, ChevronRight } from 'lucide-react';
+// import { queryData, queryPageContent } from '../components/Utilities';
+import { queryPageContent } from '../components/Utilities';
 import { useQuery } from '@tanstack/react-query';
 import EducationalServicesSection from '../components/EducationalServicesGrid';
 
 // Custom Carousel for Testimonials
-const TestimonialsSlideshow: React.FC = () => {
+// const TestimonialsSlideshow: React.FC = () => {
 
-  const [current, setCurrent] = useState(0);
+//   const [current, setCurrent] = useState(0);
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['testimonials'], 
-    queryFn: () => queryData('student-testimonials'),
-    staleTime: 6 * 60 * 60 * 1000, 
-    gcTime: 24 * 60 * 60 * 1000,
-    refetchInterval: 6 * 60 * 60 * 1000,
-});
+//   const { data, isLoading, error } = useQuery({
+//     queryKey: ['testimonials'], 
+//     queryFn: () => queryData('student-testimonials'),
+//     staleTime: 6 * 60 * 60 * 1000, 
+//     gcTime: 24 * 60 * 60 * 1000,
+//     refetchInterval: 6 * 60 * 60 * 1000,
+// });
 
-  useEffect(() => {
-    if (!data || data.length < 2) return;
-    const timer = setInterval(() => setCurrent(c => (c + 1) % data.length), 6000);
-    return () => clearInterval(timer);
-  }, [data]);
+//   useEffect(() => {
+//     if (!data || data.length < 2) return;
+//     const timer = setInterval(() => setCurrent(c => (c + 1) % data.length), 6000);
+//     return () => clearInterval(timer);
+//   }, [data]);
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[260px]">
-        <div className="w-full h-48 rounded-xl bg-gray-100 animate-pulse" />
-      </div>
-    );
-  };
+//   if (isLoading) {
+//     return (
+//       <div className="flex justify-center items-center min-h-[260px]">
+//         <div className="w-full h-48 rounded-xl bg-gray-100 animate-pulse" />
+//       </div>
+//     );
+//   };
 
-  if (error) {
-    return (
-      <div className="flex justify-center items-center min-h-[260px]">
-        <p className="mt-4 text-lg text-red-600">Error loading testimonials.</p>
-      </div>
-    );
-  };
+//   if (error) {
+//     return (
+//       <div className="flex justify-center items-center min-h-[260px]">
+//         <p className="mt-4 text-lg text-red-600">Error loading testimonials.</p>
+//       </div>
+//     );
+//   };
 
-  if (!data || !data.length) {
-    return <div className="text-gray-500 text-center min-h-[260px]">No testimonials available.</div>;
-  }
+//   if (!data || !data.length) {
+//     return <div className="text-gray-500 text-center min-h-[260px]">No testimonials available.</div>;
+//   }
 
-  const t = data[current];
-  return (
+//   const t = data[current];
+//   return (
     
-    <div className="flex flex-col items-center justify-center h-full min-h-[260px] relative">
-      <div className="bg-white p-6 rounded-xl shadow-md max-w-md w-full mx-auto transition-all duration-500">
-        <div className="flex items-center mb-4">
-          <div>
-            <h3 className="font-semibold text-gray-900">{t.student_name}</h3>
-            {t.service_name && <p className="text-sm text-primary-600">{t.service_name}</p>}
-          </div>
-        </div>
-        <p className="text-gray-600 italic">"{t.testimonial}"</p>
-      </div>
-      <div className="flex gap-2 mt-4 justify-center">
-        {data.map((i:number) => (
-          <button
-            key={i}
-            className={`w-2.5 h-2.5 rounded-full transition-colors duration-200 border border-gray-300 focus:outline-none ${i === current ? 'bg-primary-600' : 'bg-gray-300'}`}
-            onClick={() => setCurrent(i)}
-            aria-label={`Go to testimonial ${i + 1}`}
-          />
-        ))}
-      </div>
-      {data.length > 1 && (
-        <>
-          <div className="absolute inset-y-0 left-0 flex items-center">
-            <button
-              className="p-2 rounded-full bg-white shadow hover:bg-gray-100 text-primary-600"
-              onClick={() => setCurrent((current - 1 + data.length) % data.length)}
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft size={30} />
-            </button>
-          </div>
-          <div className="absolute inset-y-0 right-0 flex items-center">
-            <button
-              className="p-2 rounded-full bg-white shadow hover:bg-gray-100 text-primary-600"
-              onClick={() => setCurrent((current + 1) % data.length)}
-              aria-label="Next testimonial"
-            >
-              <ChevronRight size={30} />
-            </button>
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
+//     <div className="flex flex-col items-center justify-center h-full min-h-[260px] relative">
+//       <div className="bg-white p-6 rounded-xl shadow-md max-w-md w-full mx-auto transition-all duration-500">
+//         <div className="flex items-center mb-4">
+//           <div>
+//             <h3 className="font-semibold text-gray-900">{t.student_name}</h3>
+//             {t.service_name && <p className="text-sm text-primary-600">{t.service_name}</p>}
+//           </div>
+//         </div>
+//         <p className="text-gray-600 italic">"{t.testimonial}"</p>
+//       </div>
+//       <div className="flex gap-2 mt-4 justify-center">
+//         {data.map((i:number) => (
+//           <button
+//             key={i}
+//             className={`w-2.5 h-2.5 rounded-full transition-colors duration-200 border border-gray-300 focus:outline-none ${i === current ? 'bg-primary-600' : 'bg-gray-300'}`}
+//             onClick={() => setCurrent(i)}
+//             aria-label={`Go to testimonial ${i + 1}`}
+//           />
+//         ))}
+//       </div>
+//       {data.length > 1 && (
+//         <>
+//           <div className="absolute inset-y-0 left-0 flex items-center">
+//             <button
+//               className="p-2 rounded-full bg-white shadow hover:bg-gray-100 text-primary-600"
+//               onClick={() => setCurrent((current - 1 + data.length) % data.length)}
+//               aria-label="Previous testimonial"
+//             >
+//               <ChevronLeft size={30} />
+//             </button>
+//           </div>
+//           <div className="absolute inset-y-0 right-0 flex items-center">
+//             <button
+//               className="p-2 rounded-full bg-white shadow hover:bg-gray-100 text-primary-600"
+//               onClick={() => setCurrent((current + 1) % data.length)}
+//               aria-label="Next testimonial"
+//             >
+//               <ChevronRight size={30} />
+//             </button>
+//           </div>
+//         </>
+//       )}
+//     </div>
+//   );
+// };
 
 export default function Home () {
 
@@ -264,7 +266,7 @@ export default function Home () {
           </div>
         </section>
 
-        <section className="mb-16">
+        {/* <section className="mb-16">
           <div className="text-center mb-12">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
@@ -279,7 +281,7 @@ export default function Home () {
           <div className="min-h-[260px]">
             <TestimonialsSlideshow />
           </div>
-        </section>
+        </section> */}
 
         <section>
           <motion.div 

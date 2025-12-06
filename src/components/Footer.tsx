@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { queryPageContent } from './Utilities';
 
-interface FooterDetails {
-  heading: string;
-  description1?: string;
-  description2?: string;
-  description3?: string;
-}
+// interface FooterDetails {
+//   heading: string;
+//   description1?: string;
+//   description2?: string;
+//   description3?: string;
+// }
 interface FooterData {
   left_column_title: string;
   left_column_subtitle:  string;

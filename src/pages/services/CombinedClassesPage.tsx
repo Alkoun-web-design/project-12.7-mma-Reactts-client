@@ -14,12 +14,12 @@ interface ClassroomSchedule {
   timeframe: string;
 }
 
-interface Testimonial {
-  id: number;
-  student_name: string;
-  testimonial: string;
-  success_stories?: string;
-}
+// interface Testimonial {
+//   id: number;
+//   student_name: string;
+//   testimonial: string;
+//   success_stories?: string;
+// }
 
 const CombinedClassesPage: React.FC = () => {
 
@@ -39,13 +39,13 @@ const CombinedClassesPage: React.FC = () => {
       refetchInterval: 6 * 60 * 60 * 1000,
   });
 
-  const { data: testimonials, isLoading: testimonialsLoading, error: testimonialsError } = useQuery({
-      queryKey: ['testimonials'], 
-      queryFn: () => queryData('student-testimonials'),
-      staleTime: 6 * 60 * 60 * 1000, 
-      gcTime: 24 * 60 * 60 * 1000,
-      refetchInterval: 6 * 60 * 60 * 1000,
-  });
+  // const { data: testimonials, isLoading: testimonialsLoading, error: testimonialsError } = useQuery({
+  //     queryKey: ['testimonials'], 
+  //     queryFn: () => queryData('student-testimonials'),
+  //     staleTime: 6 * 60 * 60 * 1000, 
+  //     gcTime: 24 * 60 * 60 * 1000,
+  //     refetchInterval: 6 * 60 * 60 * 1000,
+  // });
 
   const formFields = [
     { name: "studentName", label: "Student Name", type: "text", required: true },

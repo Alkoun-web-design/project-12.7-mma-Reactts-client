@@ -14,12 +14,12 @@ interface CoachingArea {
   logo: string | null;
 }
 
-interface Testimonial {
-  id: number;
-  student_name: string;
-  testimonial: string;
-  success_stories?: string;
-}
+// interface Testimonial {
+//   id: number;
+//   student_name: string;
+//   testimonial: string;
+//   success_stories?: string;
+// }
 
 interface Faq {
   id: number;
@@ -71,13 +71,13 @@ const StudyCoachingPage: React.FC = () => {
     refetchInterval: 6 * 60 * 60 * 1000,
   });
 
-  const { data: testimonials, isLoading: testimonialsLoading, error: testimonialsError } = useQuery({
-    queryKey: ['testimnoials'], 
-    queryFn: () => queryData('student-testimonials'),
-    staleTime: 6 * 60 * 60 * 1000, 
-    gcTime: 24 * 60 * 60 * 1000,
-    refetchInterval: 6 * 60 * 60 * 1000,
-  });
+  // const { data: testimonials, isLoading: testimonialsLoading, error: testimonialsError } = useQuery({
+  //   queryKey: ['testimnoials'], 
+  //   queryFn: () => queryData('student-testimonials'),
+  //   staleTime: 6 * 60 * 60 * 1000, 
+  //   gcTime: 24 * 60 * 60 * 1000,
+  //   refetchInterval: 6 * 60 * 60 * 1000,
+  // });
 
     if (!faqs) return null; 
   // Toggle function for expanding features
