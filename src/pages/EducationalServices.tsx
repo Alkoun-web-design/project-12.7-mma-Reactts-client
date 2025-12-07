@@ -62,7 +62,7 @@ const EducationalServices: React.FC = () => {
              <div className="h-4 bg-gray-100 rounded w-1/2" />
            </div>
          )}</div>}>
-           <EducationalServicesGrid />
+           <EducationalServicesGrid limit={12} />
          </Suspense>
         </section>
         <section className="mb-16">
