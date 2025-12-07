@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import PageHeader from '../components/PageHeader';
 import { useQuery } from '@tanstack/react-query';
@@ -54,16 +54,16 @@ const EducationalServices: React.FC = () => {
              {pageContent.second_subtitle}
            </p>
          </motion.div>
-         <Suspense fallback={<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">{Array.from({ length: 8 }).map((_, i) => 
+         {/* <Suspense fallback={<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">{Array.from({ length: 8 }).map((_, i) => 
            <div key={i} className="card animate-pulse">
              <div className="mb-4 h-8 w-8 bg-gray-200 rounded-full" />
                <div className="h-6 bg-gray-200 rounded w-2/3 mb-2" />
              <div className="h-4 bg-gray-100 rounded w-full mb-4" />
              <div className="h-4 bg-gray-100 rounded w-1/2" />
            </div>
-         )}</div>}>
+         )}</div>}> */}
            <EducationalServicesGrid limit={12} />
-         </Suspense>
+         {/* </Suspense> */}
         </section>
         <section className="mb-16">
           <div className="bg-primary-50 p-8 rounded-2xl">
