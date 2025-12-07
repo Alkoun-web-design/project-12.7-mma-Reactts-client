@@ -177,7 +177,8 @@ export default function Home () {
               {data.second_subtitle}
             </motion.p>
           </div>
-          <EducationalServicesSection limit={4} />
+          {/* <EducationalServicesSection limit={4} /> */}
+          <EducationalServicesSection />
           <div className="text-center mt-8">
             <Link 
               to="/educational-services" 

@@ -13,9 +13,9 @@ interface EducationalService {
   isActive: number;
 }
 
-interface EducationalServicesGridProps {
-  limit: number;
-}
+// interface EducationalServicesGridProps {
+//   limit: number;
+// }
 
 // const ServiceSkeleton = () => (
 //   <div className="card animate-pulse">
@@ -41,8 +41,8 @@ function getIcon(service_key: string) {
   const key = service_key.replace(/_/g, '-').toLowerCase();
   return ICONS[key] || <BookOpen size={30} />;
 }
-export default function EducationalServicesSection({limit}: EducationalServicesGridProps) {
-// export default function EducationalServicesSection() {
+// export default function EducationalServicesSection({limit}: EducationalServicesGridProps) {
+export default function EducationalServicesSection() {
 
   const { data: services, isLoading: servicesLoading, error: servicesError } = useQuery({
     queryKey: ['educational-services'], 
@@ -59,7 +59,7 @@ export default function EducationalServicesSection({limit}: EducationalServicesG
       {servicesError && <div className="text-center text-red-500">Error loading faqs.</div>}
       {services && services.map((service:EducationalService, idx:number) => (
         // ? (limit ? services.slice(0, limit) : services).map((service:EducationalService, idx:number) => (
-        idx < limit ?
+        // idx < limit ?
             <ServiceCard
               key={service.id}
               title={service.name}
@@ -68,7 +68,7 @@ export default function EducationalServicesSection({limit}: EducationalServicesG
               linkTo={`/educational-services/${service.service_key}`}
               delay={idx}
             />
-        : null
+        // : null
           ))
         // : Array.from({ length: limit || 4 }).map((_, i) => <ServiceSkeleton key={i} />)
       }
